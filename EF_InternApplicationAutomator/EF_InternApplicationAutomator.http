@@ -1,0 +1,6 @@
+@EF_InternApplicationAutomator_HostAddress = http://localhost:5199
+
+GET {{EF_InternApplicationAutomator_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

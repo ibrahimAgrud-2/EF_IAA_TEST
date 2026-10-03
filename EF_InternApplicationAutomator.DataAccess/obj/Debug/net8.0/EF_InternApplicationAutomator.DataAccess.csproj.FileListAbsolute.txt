@@ -1,0 +1,12 @@
+C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.DataAccess\bin\Debug\net8.0\EF_InternApplicationAutomator.DataAccess.deps.json
+C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.DataAccess\bin\Debug\net8.0\EF_InternApplicationAutomator.DataAccess.dll
+C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.DataAccess\bin\Debug\net8.0\EF_InternApplicationAutomator.DataAccess.pdb
+C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.DataAccess\obj\Debug\net8.0\EF_InternApplicationAutomator.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.DataAccess\obj\Debug\net8.0\EF_InternApplicationAutomator.DataAccess.AssemblyInfoInputs.cache
+C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.DataAccess\obj\Debug\net8.0\EF_InternApplicationAutomator.DataAccess.AssemblyInfo.cs
+C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.DataAccess\obj\Debug\net8.0\EF_InternApplicationAutomator.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.DataAccess\obj\Debug\net8.0\EF_InternApplicationAutomator.DataAccess.dll
+C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.DataAccess\obj\Debug\net8.0\refint\EF_InternApplicationAutomator.DataAccess.dll
+C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.DataAccess\obj\Debug\net8.0\EF_InternApplicationAutomator.DataAccess.pdb
+C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.DataAccess\obj\Debug\net8.0\ref\EF_InternApplicationAutomator.DataAccess.dll
+C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.DataAccess\obj\Debug\net8.0\EF_InternApplicationAutomator.DataAccess.csproj.AssemblyReference.cache
