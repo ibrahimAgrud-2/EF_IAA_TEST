@@ -1,46 +1,6 @@
 [
   {
     "ContainingType": "EF_InternApplicationAutomator.API.Controllers.PersonController",
-    "Method": "AddNewPerson",
-    "RelativePath": "api/Person",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "newStudentDTO",
-        "Type": "EF_InternApplicationAutomator.Business.PersonBL\u002BPersonCreateDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "EF_InternApplicationAutomator.Business.PersonBL\u002BPersonResponseDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 201
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 500
-      }
-    ]
-  },
-  {
-    "ContainingType": "EF_InternApplicationAutomator.API.Controllers.PersonController",
     "Method": "UpdateStudent",
     "RelativePath": "api/Person/{id}",
     "HttpMethod": "PUT",
@@ -51,16 +11,11 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
-      },
-      {
-        "Name": "updatedPerson",
-        "Type": "EF_InternApplicationAutomator.Business.PersonBL\u002BPersonCreateDTO",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "EF_InternApplicationAutomator.Business.PersonBL\u002BPersonResponseDto",
+        "Type": "EF_InternApplicationAutomator.Business.PersonBL\u002BPersonCreateDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -88,34 +43,5 @@
       }
     ],
     "EndpointName": "UpdatePerson"
-  },
-  {
-    "ContainingType": "EF_InternApplicationAutomator.API.Controllers.PersonController",
-    "Method": "GetAllPeople",
-    "RelativePath": "api/Person/All",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[EF_InternApplicationAutomator.Business.PersonBL\u002BPersonResponseDto, EF_InternApplicationAutomator.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
-      }
-    ]
   }
 ]

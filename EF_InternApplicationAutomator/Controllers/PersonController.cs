@@ -20,72 +20,14 @@ namespace EF_InternApplicationAutomator.API.Controllers
             _person = p;
         }
 
-
-        [HttpGet("All")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<IEnumerable<PersonResponseDto>> GetAllPeople()
-        {
-
-            List<PersonResponseDto> StudentList = _person.GetAllPeople();
-            if (StudentList.Count == 0)
-            {
-                return NotFound("No Data Available in the Table");
-            }
-
-            return Ok(StudentList);
-        }
-
-
-        //[HttpGet("{ID}", Name = "Find")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status404NotFound)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //public ActionResult<PersonResponseDto> Find(int ID)
-        //{
-        //    if (ID < 1)
-        //    {
-        //        return BadRequest($"Not Accepted ID {ID}");
-        //    }
-        //    PersonResponseDto p = _person.Find(ID);
-        //    if (p == null)
-        //    {
-        //        return NotFound($"No Person With ID {ID}");
-        //    }
-        //    return Ok(p);
-
-        //}
-
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<PersonResponseDto> AddNewPerson(PersonCreateDTO newStudentDTO)
-        {
-
-            //we validate the data here
-            if (newStudentDTO == null )
-            {
-                return BadRequest("Invalid student data.");
-            }
-            int ID = _person.AddPerson(newStudentDTO);
-          
-            return CreatedAtRoute("Find", new { id = ID }, newStudentDTO);
-
-        }
-
+        
         //here we use http put method for update
         [HttpPut("{id}", Name = "UpdatePerson")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<PersonResponseDto> UpdateStudent(int id, PersonCreateDTO updatedPerson)
+        public ActionResult<PersonCreateDTO> UpdateStudent(int id)
         {
-            if (id < 1 || updatedPerson == null )
-            {
-                return BadRequest("Invalid Person data.");
-            }
-
 
 
             PersonEntity PersonEntity = _person.Find(id);
@@ -95,9 +37,11 @@ namespace EF_InternApplicationAutomator.API.Controllers
                 return NotFound($"Student with ID {id} not found.");
             }
 
+            PersonEntity.FirstName ="test";
+            PersonEntity.LastName = "test";
 
-       
-            if(_person.UpdatePerson(id, PersonEntity))
+
+            if (_person.UpdatePerson(id, PersonEntity))
             {
                 return Ok(PersonEntity);
             }
