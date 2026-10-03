@@ -1,5 +1,6 @@
 ﻿
 using EF_InternApplicationAutomator.Business;
+using EF_InternApplicationAutomator.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using static EF_InternApplicationAutomator.Business.PersonBL;
@@ -36,24 +37,24 @@ namespace EF_InternApplicationAutomator.API.Controllers
         }
 
 
-        [HttpGet("{ID}", Name = "Find")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<PersonResponseDto> Find(int ID)
-        {
-            if (ID < 1)
-            {
-                return BadRequest($"Not Accepted ID {ID}");
-            }
-            PersonResponseDto p = _person.Find(ID);
-            if (p == null)
-            {
-                return NotFound($"No Person With ID {ID}");
-            }
-            return Ok(p);
+        //[HttpGet("{ID}", Name = "Find")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //public ActionResult<PersonResponseDto> Find(int ID)
+        //{
+        //    if (ID < 1)
+        //    {
+        //        return BadRequest($"Not Accepted ID {ID}");
+        //    }
+        //    PersonResponseDto p = _person.Find(ID);
+        //    if (p == null)
+        //    {
+        //        return NotFound($"No Person With ID {ID}");
+        //    }
+        //    return Ok(p);
 
-        }
+        //}
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -87,17 +88,18 @@ namespace EF_InternApplicationAutomator.API.Controllers
 
 
 
-            PersonResponseDto personResponseDto = _person.Find(id);
+            PersonEntity PersonEntity = _person.Find(id);
 
-            if(personResponseDto == null)
+            if(PersonEntity == null)
             {
                 return NotFound($"Student with ID {id} not found.");
             }
 
+
        
-            if(_person.UpdatePerson(id, updatedPerson))
+            if(_person.UpdatePerson(id, PersonEntity))
             {
-                return Ok(personResponseDto);
+                return Ok(PersonEntity);
             }
             else
             {

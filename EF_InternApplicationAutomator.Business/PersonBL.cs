@@ -46,7 +46,7 @@ namespace EF_InternApplicationAutomator.Business
 
         }
 
-        //Add yaparken ID istememize Gerek yok. çünkü ID identical. Bu yüzden Aynı personDTO'sunu 
+        //Add yaparken ID istememize Gerek yok. çünkü ID identical. Bu yüzden Aynı PersonEntity'sunu 
         //kullanamayız. Bu yüzden create'e özel DTO kullnırız
         //profesyonel API'lerde tek bir DTO değil, işleme göre (Create/Update/Response) birden
         //fazla DTO görmek çok yaygındır.
@@ -85,39 +85,7 @@ namespace EF_InternApplicationAutomator.Business
         }
 
 
-        public class PersonUpdateDTO
-        {
-            private int ID { get; set; }
 
-            [Required]
-            public string FirstName { get; set; }
-
-            [Required]
-            public string LastName { get; set; }
-
-            [Required]
-            public string Email { get; set; }
-
-            [Required]
-            public string phone { get; set; }
-
-            [Required]
-            public string Address { get; set; }
-
-            public string ImagePath { get; set; }
-            public PersonCreateDTO(string firstName, string lastName, string email,
-                    string phone, string address, string imagePath)
-            {
-
-                FirstName = firstName;
-                LastName = lastName;
-                Email = email;
-                this.phone = phone;
-                Address = address;
-                ImagePath = imagePath;
-            }
-
-        }
 
         //ADO projelerimizde tüm fonksiyonları static tanımlayıp direk erişim yapardık
         //ama EF mimarisinde static tanımlayaöadığımız için objeler üzerinden erişim yapmalıyız.
@@ -149,13 +117,13 @@ namespace EF_InternApplicationAutomator.Business
 
         }
 
-        public PersonResponseDto Find(int PersonID)
+        public PersonEntity Find(int PersonID)
         {
             PersonEntity personEntity = _PersonDataAccess.Find(PersonID);
 
             if(personEntity!=null)
             {
-                return new PersonResponseDto(personEntity.PersonID,personEntity.FirstName,personEntity.LastName,personEntity.Email,personEntity.Phone,personEntity.Address,personEntity.ImagePath);
+                return new PersonEntity(personEntity.PersonID,personEntity.FirstName,personEntity.LastName,personEntity.Email,personEntity.Phone,personEntity.Address,personEntity.ImagePath);
             }
             return null;
         }
@@ -167,11 +135,9 @@ namespace EF_InternApplicationAutomator.Business
             return _PersonDataAccess.AddPerson(personEntity);
         }
 
-        public bool UpdatePerson(int personID,PersonCreateDTO personDTO)
+        public bool UpdatePerson(int personID, PersonEntity PersonEntity)
         {
-            PersonEntity personEntity = new PersonEntity(personID, personDTO.FirstName, personDTO.LastName, personDTO.Email, personDTO.phone, personDTO.Address, personDTO.ImagePath);
-  
-            return _PersonDataAccess.AddPerson(personEntity)!=1;
+            return _PersonDataAccess.AddPerson(PersonEntity) !=1;
         }
 
     }

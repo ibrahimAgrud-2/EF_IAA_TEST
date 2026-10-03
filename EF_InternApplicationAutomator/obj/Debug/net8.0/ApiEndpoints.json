@@ -91,51 +91,6 @@
   },
   {
     "ContainingType": "EF_InternApplicationAutomator.API.Controllers.PersonController",
-    "Method": "Find",
-    "RelativePath": "api/Person/{ID}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "ID",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "EF_InternApplicationAutomator.Business.PersonBL\u002BPersonResponseDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      }
-    ],
-    "EndpointName": "Find"
-  },
-  {
-    "ContainingType": "EF_InternApplicationAutomator.API.Controllers.PersonController",
     "Method": "GetAllPeople",
     "RelativePath": "api/Person/All",
     "HttpMethod": "GET",
