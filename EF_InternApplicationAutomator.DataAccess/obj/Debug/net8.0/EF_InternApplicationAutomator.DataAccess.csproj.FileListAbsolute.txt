@@ -10,3 +10,4 @@ C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAu
 C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.DataAccess\obj\Debug\net8.0\EF_InternApplicationAutomator.DataAccess.pdb
 C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.DataAccess\obj\Debug\net8.0\ref\EF_InternApplicationAutomator.DataAccess.dll
 C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.DataAccess\obj\Debug\net8.0\EF_InternApplicationAutomator.DataAccess.csproj.AssemblyReference.cache
+C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.DataAccess\obj\Debug\net8.0\EF_InternApplicationAutomator.DataAccess.sourcelink.json

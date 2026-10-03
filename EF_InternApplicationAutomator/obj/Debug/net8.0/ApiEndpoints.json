@@ -11,11 +11,16 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      },
+      {
+        "Name": "personCreateDTO",
+        "Type": "EF_InternApplicationAutomator.Business.PersonBL\u002BPersonCreateDTO",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "EF_InternApplicationAutomator.Business.PersonBL\u002BPersonCreateDTO",
+        "Type": "System.String",
         "MediaTypes": [
           "text/plain",
           "application/json",

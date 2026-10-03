@@ -50,30 +50,66 @@ namespace EF_InternApplicationAutomator.Business
             }
 
         }
+        public class PersonResponseDTO
+        {
+            public int ID { get; set; }
+
+            [Required]
+            public string FirstName { get; set; }
+
+            [Required]
+            public string LastName { get; set; }
+
+            [Required]
+            public string Email { get; set; }
+
+            [Required]
+            public string phone { get; set; }
+
+            [Required]
+            public string Address { get; set; }
+
+            public string ImagePath { get; set; }
+            public PersonResponseDTO(int ID,string firstName, string lastName, string email,
+                    string phone, string address, string imagePath)
+            {
+
+                FirstName = firstName;
+                LastName = lastName;
+                Email = email;
+                this.phone = phone;
+                Address = address;
+                ImagePath = imagePath;
+            }
+
+        }
 
 
-        public PersonEntity Find(int PersonID)
+        public PersonResponseDTO Find(int PersonID)
         {
             PersonEntity personEntity = _PersonDataAccess.Find(PersonID);
 
             if (personEntity != null)
             {
-                return new PersonEntity(personEntity.PersonID, personEntity.FirstName, personEntity.LastName, personEntity.Email, personEntity.Phone, personEntity.Address, personEntity.ImagePath);
+                return new PersonResponseDTO(personEntity.PersonID, personEntity.FirstName, personEntity.LastName, personEntity.Email, personEntity.Phone, personEntity.Address, personEntity.ImagePath);
             }
             return null;
         }
 
 
-
-        //sorun bu olabilir
-        public int AddPerson(PersonEntity personEntity)
+        public bool UpdatePerson(int personID, PersonCreateDTO personCreateDTO)
         {
-            return _PersonDataAccess.AddPerson(personEntity);
-        }
+            PersonDataAccess.PersonEntity2 pe = new PersonDataAccess.PersonEntity2();
+            pe.FirstName = personCreateDTO.FirstName;
+            pe.LastName = personCreateDTO.LastName;
+            pe.Email = personCreateDTO.Email;
+            pe.Phone = personCreateDTO.phone;
+            pe.Address = personCreateDTO.Address;
+            pe.ImagePath = personCreateDTO.ImagePath;
 
-        public bool UpdatePerson(int personID, PersonEntity PersonEntity)
-        {
-            return _PersonDataAccess.AddPerson(PersonEntity) !=1;
+
+
+            return _PersonDataAccess.Update(personID, pe) !=-1;
         }
 
     }

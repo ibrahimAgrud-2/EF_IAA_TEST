@@ -13,3 +13,4 @@ C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAu
 C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.Business\obj\Debug\net8.0\refint\EF_InternApplicationAutomator.Business.dll
 C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.Business\obj\Debug\net8.0\EF_InternApplicationAutomator.Business.pdb
 C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.Business\obj\Debug\net8.0\ref\EF_InternApplicationAutomator.Business.dll
+C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator.Business\obj\Debug\net8.0\EF_InternApplicationAutomator.Business.sourcelink.json

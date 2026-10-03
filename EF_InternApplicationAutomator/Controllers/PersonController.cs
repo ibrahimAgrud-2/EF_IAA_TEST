@@ -21,29 +21,22 @@ namespace EF_InternApplicationAutomator.API.Controllers
         }
 
         
+
         //here we use http put method for update
         [HttpPut("{id}", Name = "UpdatePerson")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<PersonCreateDTO> UpdateStudent(int id)
+        public ActionResult<string> UpdateStudent(int id,PersonCreateDTO personCreateDTO)
         {
 
 
-            PersonEntity PersonEntity = _person.Find(id);
 
-            if(PersonEntity == null)
+            //TODO: Inset isPersonExist Function. If person does not exist return NotFound
+
+            if (_person.UpdatePerson(id, personCreateDTO))
             {
-                return NotFound($"Student with ID {id} not found.");
-            }
-
-            PersonEntity.FirstName ="test";
-            PersonEntity.LastName = "test";
-
-
-            if (_person.UpdatePerson(id, PersonEntity))
-            {
-                return Ok(PersonEntity);
+                return Ok("ok");
             }
             else
             {
