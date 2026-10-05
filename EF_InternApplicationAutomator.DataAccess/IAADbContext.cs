@@ -13,7 +13,6 @@ namespace EF_InternApplicationAutomator.DataAccess
 
 
         public  DbSet<PersonEntity> People { get; set; }
-        
-        public DbSet<UserEntity> User { set; get; }
+
     }
 }

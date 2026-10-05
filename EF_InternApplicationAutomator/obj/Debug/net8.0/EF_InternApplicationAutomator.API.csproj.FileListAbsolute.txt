@@ -171,3 +171,4 @@ C:\Users\ibrah\Masaüstü\EF_InternApplicationAutomator\EF_InternApplicationAuto
 C:\Users\ibrah\Masaüstü\EF_InternApplicationAutomator\EF_InternApplicationAutomator\obj\Debug\net8.0\EF_InternApplicationAutomator.API.pdb
 C:\Users\ibrah\Masaüstü\EF_InternApplicationAutomator\EF_InternApplicationAutomator\obj\Debug\net8.0\EF_InternApplicationAutomator.API.genruntimeconfig.cache
 C:\Users\ibrah\Masaüstü\EF_InternApplicationAutomator\EF_InternApplicationAutomator\obj\Debug\net8.0\ref\EF_InternApplicationAutomator.API.dll
+C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator\obj\Debug\net8.0\EF_InternApplicationAutomator.API.MvcApplicationPartsAssemblyInfo.cs
