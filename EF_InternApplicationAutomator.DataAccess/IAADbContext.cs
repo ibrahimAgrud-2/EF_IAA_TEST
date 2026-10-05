@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EF_InternApplicationAutomator.DataAccess.User;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace EF_InternApplicationAutomator.DataAccess
@@ -13,6 +14,6 @@ namespace EF_InternApplicationAutomator.DataAccess
 
 
         public  DbSet<PersonEntity> People { get; set; }
-
+        public DbSet<UserEntity> Users { set; get; }
     }
 }
