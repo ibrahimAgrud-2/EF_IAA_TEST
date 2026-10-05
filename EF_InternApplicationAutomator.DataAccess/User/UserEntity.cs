@@ -19,7 +19,6 @@ namespace EF_InternApplicationAutomator.DataAccess.User
         public string UserName { get; set; }
 
         [Required]
-        [MaxLength(20)]
         public int PersonID { get; set; }
 
 
@@ -41,7 +40,7 @@ namespace EF_InternApplicationAutomator.DataAccess.User
 
         public UserEntity(int UserID, int personID, string userName, string passwordHash, string permissionType, DateTime createdDate, bool isActive)
         {
-
+            this.UserID = UserID;
             PersonID = personID;
             PermissionType = permissionType;
             CreatedDate = createdDate;
