@@ -14,7 +14,7 @@
       },
       {
         "Name": "personCreateDTO",
-        "Type": "EF_InternApplicationAutomator.Business.PersonBL\u002BPersonCreateDTO",
+        "Type": "Shared.PersonCreateSDTO",
         "IsRequired": true
       }
     ],

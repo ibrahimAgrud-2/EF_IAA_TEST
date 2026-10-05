@@ -1,4 +1,5 @@
 ﻿using EF_InternApplicationAutomator.DataAccess;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,7 +17,8 @@ namespace EF_InternApplicationAutomator.Business
             _PersonDataAccess = personDataAccess;
         }
 
-
+        //DTOS
+        /*
         public class PersonCreateDTO
         {
            
@@ -31,20 +33,20 @@ namespace EF_InternApplicationAutomator.Business
             public string Email { get; set; }
 
             [Required]
-            public string phone { get; set; }
+            public string Phone { get; set; }
 
             [Required]
             public string Address { get; set; }
 
             public string ImagePath { get; set; }
             public PersonCreateDTO(string firstName, string lastName, string email,
-                    string phone, string address, string imagePath)
+                    string Phone, string address, string imagePath)
             {
               
                 FirstName = firstName;
                 LastName = lastName;
                 Email = email;
-                this.phone = phone;
+                this.Phone = Phone;
                 Address = address;
                 ImagePath = imagePath;
             }
@@ -64,20 +66,20 @@ namespace EF_InternApplicationAutomator.Business
             public string Email { get; set; }
 
             [Required]
-            public string phone { get; set; }
+            public string Phone { get; set; }
 
             [Required]
             public string Address { get; set; }
 
             public string ImagePath { get; set; }
             public PersonResponseDTO(int ID,string firstName, string lastName, string email,
-                    string phone, string address, string imagePath)
+                    string Phone, string address, string imagePath)
             {
 
                 FirstName = firstName;
                 LastName = lastName;
                 Email = email;
-                this.phone = phone;
+                this.Phone = Phone;
                 Address = address;
                 ImagePath = imagePath;
             }
@@ -96,20 +98,29 @@ namespace EF_InternApplicationAutomator.Business
             return null;
         }
 
+        */
 
-        public bool UpdatePerson(int personID, PersonCreateDTO personCreateDTO)
+        public PersonResponseSDTO Find(int PersonID)
         {
-            PersonDataAccess.PersonEntity2 pe = new PersonDataAccess.PersonEntity2();
-            pe.FirstName = personCreateDTO.FirstName;
-            pe.LastName = personCreateDTO.LastName;
-            pe.Email = personCreateDTO.Email;
-            pe.Phone = personCreateDTO.phone;
-            pe.Address = personCreateDTO.Address;
-            pe.ImagePath = personCreateDTO.ImagePath;
+            return _PersonDataAccess.Find(PersonID);
+        }
+
+        public bool UpdatePerson(int personID, PersonCreateSDTO personCreateDTO)
+        {
+            //PersonResponseSDTO person = Find(personID);
+            //person.FirstName = personCreateDTO.FirstName;
+            //person.LastName = personCreateDTO.LastName;
+            //person.Email = personCreateDTO.Email;
+            //person.Phone = personCreateDTO.Phone;
+            //person.Address = personCreateDTO.Address;
+            //person.ImagePath = personCreateDTO.ImagePath;
+
+
+            //check if Exists 
 
 
 
-            return _PersonDataAccess.Update(personID, pe) !=-1;
+            return _PersonDataAccess.Update(personID, personCreateDTO) !=-1;
         }
 
     }

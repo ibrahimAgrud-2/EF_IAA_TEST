@@ -26,17 +26,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PersonCreateDTO"
+                "$ref": "#/components/schemas/PersonCreateSDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/PersonCreateDTO"
+                "$ref": "#/components/schemas/PersonCreateSDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/PersonCreateDTO"
+                "$ref": "#/components/schemas/PersonCreateSDTO"
               }
             }
           }
@@ -108,7 +108,7 @@
   },
   "components": {
     "schemas": {
-      "PersonCreateDTO": {
+      "PersonCreateSDTO": {
         "required": [
           "address",
           "email",

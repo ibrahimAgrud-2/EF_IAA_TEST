@@ -2,6 +2,7 @@
 using EF_InternApplicationAutomator.Business;
 using EF_InternApplicationAutomator.DataAccess;
 using Microsoft.AspNetCore.Mvc;
+using Shared;
 using System;
 using static EF_InternApplicationAutomator.Business.PersonBL;
 
@@ -27,12 +28,14 @@ namespace EF_InternApplicationAutomator.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<string> UpdateStudent(int id,PersonCreateDTO personCreateDTO)
+        public ActionResult<string> UpdateStudent(int id,PersonCreateSDTO personCreateDTO)
         {
 
 
 
             //TODO: Inset isPersonExist Function. If person does not exist return NotFound
+
+
 
             if (_person.UpdatePerson(id, personCreateDTO))
             {

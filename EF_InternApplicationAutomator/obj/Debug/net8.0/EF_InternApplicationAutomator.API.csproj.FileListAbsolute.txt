@@ -20,7 +20,6 @@ C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAu
 C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator\obj\Debug\net8.0\EF_InternApplicationAutomator.API.AssemblyInfoInputs.cache
 C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator\obj\Debug\net8.0\EF_InternApplicationAutomator.API.AssemblyInfo.cs
 C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator\obj\Debug\net8.0\EF_InternApplicationAutomator.API.csproj.CoreCompileInputs.cache
-C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator\obj\Debug\net8.0\EF_InternApplicationAutomator.API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator\obj\Debug\net8.0\EF_InternApplicationAutomator.API.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
@@ -83,3 +82,5 @@ C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAu
 C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator\obj\Debug\net8.0\EF_InternApplicationAutomator.API.sourcelink.json
+C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator\bin\Debug\net8.0\Shared.dll
+C:\Users\ibrah\source\repos\EF_InternApplicationAutomator\EF_InternApplicationAutomator\bin\Debug\net8.0\Shared.pdb

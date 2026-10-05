@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EF_InternApplicationAutomator.Business\EF_InternApplicationAutomator.Business.csproj" />
+    <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
 </Project>

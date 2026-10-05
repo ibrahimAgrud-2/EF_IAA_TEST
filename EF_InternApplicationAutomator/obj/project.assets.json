@@ -1060,7 +1060,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
-          "EF_InternApplicationAutomator.DataAccess": "1.0.0"
+          "EF_InternApplicationAutomator.DataAccess": "1.0.0",
+          "Shared": "1.0.0"
         },
         "compile": {
           "bin/placeholder/EF_InternApplicationAutomator.Business.dll": {}
@@ -1073,13 +1074,24 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.31"
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.31",
+          "Shared": "1.0.0"
         },
         "compile": {
           "bin/placeholder/EF_InternApplicationAutomator.DataAccess.dll": {}
         },
         "runtime": {
           "bin/placeholder/EF_InternApplicationAutomator.DataAccess.dll": {}
+        }
+      },
+      "Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Shared.dll": {}
         }
       }
     }
@@ -3143,11 +3155,17 @@
       "type": "project",
       "path": "../EF_InternApplicationAutomator.DataAccess/EF_InternApplicationAutomator.DataAccess.csproj",
       "msbuildProject": "../EF_InternApplicationAutomator.DataAccess/EF_InternApplicationAutomator.DataAccess.csproj"
+    },
+    "Shared/1.0.0": {
+      "type": "project",
+      "path": "../Shared/Shared.csproj",
+      "msbuildProject": "../Shared/Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "EF_InternApplicationAutomator.Business >= 1.0.0",
+      "Shared >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.6.2"
     ]
   },
@@ -3185,6 +3203,9 @@
           "projectReferences": {
             "C:\\Users\\ibrah\\source\\repos\\EF_InternApplicationAutomator\\EF_InternApplicationAutomator.Business\\EF_InternApplicationAutomator.Business.csproj": {
               "projectPath": "C:\\Users\\ibrah\\source\\repos\\EF_InternApplicationAutomator\\EF_InternApplicationAutomator.Business\\EF_InternApplicationAutomator.Business.csproj"
+            },
+            "C:\\Users\\ibrah\\source\\repos\\EF_InternApplicationAutomator\\Shared\\Shared.csproj": {
+              "projectPath": "C:\\Users\\ibrah\\source\\repos\\EF_InternApplicationAutomator\\Shared\\Shared.csproj"
             }
           }
         }

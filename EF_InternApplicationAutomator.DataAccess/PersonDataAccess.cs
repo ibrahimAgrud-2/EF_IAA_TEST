@@ -1,18 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Shared;
+
 
 namespace EF_InternApplicationAutomator.DataAccess
 {
     public  class PersonDataAccess
     {
 
-
-          public class PersonEntity2
+        /*
+          public class PersonReceiveEntity
         {
             
             public int PersonID { get; set; }
@@ -38,7 +34,7 @@ namespace EF_InternApplicationAutomator.DataAccess
             
         }
 
-
+        */
 
         ///Framework'un gerektirdiği kısımlar
         private  readonly IAADbContext _Context;
@@ -50,27 +46,33 @@ namespace EF_InternApplicationAutomator.DataAccess
 
 
 
-        public PersonEntity Find(int PersonID)
+        public PersonResponseSDTO  Find(int PersonID)
         {
-            return _Context.People.Find(PersonID);
+            PersonEntity personEntity = _Context.People.Find(PersonID);
+            if (personEntity == null)
+                return null;
+            return new PersonResponseSDTO(personEntity.PersonID, personEntity.FirstName, personEntity.LastName, personEntity.Email, personEntity.Phone, personEntity.Address, personEntity.ImagePath);
         }
 
 
-        public int Update(int ID, PersonEntity2 pe)
+        public int Update(int ID, PersonCreateSDTO personCreateDTO)
         {
 
-            var pw = _Context.People.Find(ID);
-            if(pw==null&&pe==null)
+            var person = _Context.People.Find(ID);
+            if(person == null&& personCreateDTO == null)
             {
                 return -1;
             }
+            person.FirstName = personCreateDTO.FirstName;
+            person.LastName = personCreateDTO.LastName;
+            person.Email = personCreateDTO.Email;
+            person.Phone = personCreateDTO.Phone;
+            person.Address = personCreateDTO.Address;
+            person.ImagePath = personCreateDTO.ImagePath;
+           
 
-            pw.FirstName = pe.FirstName;
-            pw.LastName = pe.LastName;
-            pw.Address = pe.Address;
 
-
-            if(_Context.SaveChanges()>0)
+            if (_Context.SaveChanges()>0)
             {
                 return ID;
             }
