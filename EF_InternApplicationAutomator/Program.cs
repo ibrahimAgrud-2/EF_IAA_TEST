@@ -1,4 +1,5 @@
 using EF_InternApplicationAutomator.DataAccess;
+using EF_InternApplicationAutomator.DataAccess.User;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -16,10 +17,14 @@ builder.Services.AddSwaggerGen();
 //Connection String
 builder.Services.AddDbContext<IAADbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 //PersonData Access'e PL nas?l eri?ebiliyor. Eri?memeli.
 builder.Services.AddScoped<PersonDataAccess>();
 builder.Services.AddScoped<EF_InternApplicationAutomator.Business.PersonBL>();
 
+
+builder.Services.AddScoped<EF_InternApplicationAutomator.DataAccess.User.UserDataAccess>();
+builder.Services.AddScoped<EF_InternApplicationAutomator.Business.User.UserBL>();
 
 var app = builder.Build();
 
