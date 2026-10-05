@@ -1,1 +1,3 @@
-﻿select    * from People
+﻿select    * from users
+
+select passwordHash from users
