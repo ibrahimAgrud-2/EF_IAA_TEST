@@ -17,155 +17,29 @@ namespace EF_InternApplicationAutomator.Business
             _PersonDataAccess = personDataAccess;
         }
 
-
-
-        public int PersonID { get; set; }
-        [Required]
-        public string FirstName { get; set; }
-        [Required]
-        public string LastName { get; set; }
-        public string FullName
+        public List<PersonResponseSDTO> GetAllPeople()
         {
-            get { return FirstName + " "  + LastName; }
-
-        }
-        [Required]
-        public string Email { get; set; }
-        [Required]
-        public string Phone { get; set; }
-        [Required]
-        public string Address { get; set; }
-        public string ImagePath { get; set; }
-
-        public PersonBL(int personID,string firstName, string lastName, string email,
-                string phone, string address, string imagePath)
-        {
-
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-            this.Phone = phone;
-            Address = address;
-            ImagePath = imagePath;
-            PersonID = personID;
-            this.Mode = enMode.Update;
-        }
-        public PersonBL()
-        {
-
-            FirstName = "";
-            LastName = "";
-            Email = "";
-            this.Phone = "";
-            Address = "";
-            ImagePath = "";
-            PersonID =-1;
-            this.Mode = enMode.AddNew;
-
-        }
-        public enum enMode { AddNew = 0, Update = 1 };
-        public enMode Mode = enMode.AddNew;
-
-        public PersonResponseSDTO createSDTO { get { return new PersonResponseSDTO(this.PersonID, this.FirstName, this.LastName, this.Email, this.Phone, this.Address, this.ImagePath); } }
-
-
-        //DTOS
-        /*
-        public class PersonCreateDTO
-        {
-           
-
-            [Required]
-            public string FirstName { get; set; }
-
-            [Required]
-            public string LastName { get; set; }
-
-            [Required]
-            public string Email { get; set; }
-
-            [Required]
-            public string Phone { get; set; }
-
-            [Required]
-            public string Address { get; set; }
-
-            public string ImagePath { get; set; }
-            public PersonCreateDTO(string firstName, string lastName, string email,
-                    string Phone, string address, string imagePath)
-            {
-              
-                FirstName = firstName;
-                LastName = lastName;
-                Email = email;
-                this.Phone = Phone;
-                Address = address;
-                ImagePath = imagePath;
-            }
-
-        }
-        public class PersonResponseDTO
-        {
-            public int ID { get; set; }
-
-            [Required]
-            public string FirstName { get; set; }
-
-            [Required]
-            public string LastName { get; set; }
-
-            [Required]
-            public string Email { get; set; }
-
-            [Required]
-            public string Phone { get; set; }
-
-            [Required]
-            public string Address { get; set; }
-
-            public string ImagePath { get; set; }
-            public PersonResponseDTO(int ID,string firstName, string lastName, string email,
-                    string Phone, string address, string imagePath)
-            {
-
-                FirstName = firstName;
-                LastName = lastName;
-                Email = email;
-                this.Phone = Phone;
-                Address = address;
-                ImagePath = imagePath;
-            }
-
+            return _PersonDataAccess.GetAllPeople();
         }
 
-
-        public PersonResponseDTO Find(int PersonID)
+        public PersonResponseSDTO Find(int personID)
         {
-            PersonEntity personEntity = _PersonDataAccess.Find(PersonID);
-
-            if (personEntity != null)
-            {
-                return new PersonResponseDTO(personEntity.PersonID, personEntity.FirstName, personEntity.LastName, personEntity.Email, personEntity.Phone, personEntity.Address, personEntity.ImagePath);
-            }
-            return null;
+            return _PersonDataAccess.Find(personID);
         }
 
-        */
-
-        public PersonBL Find(int PersonID)
+        public int UpdatePerson(int personID,PersonCreateSDTO personCreateSDTO)
         {
-            PersonResponseSDTO pcd = _PersonDataAccess.Find(PersonID);
-            if (pcd!=null)
-            {
-                return new PersonBL(pcd.PersonID, pcd.FirstName, pcd.LastName, pcd.Email, pcd.Phone, pcd.Address, pcd.ImagePath);
-            }
-            return null;
+            return _PersonDataAccess.UpdatePerson(personID,personCreateSDTO);
         }
 
-        public bool UpdatePerson(int personID, PersonCreateSDTO personCreateDTO)
+        public int AddPerson(PersonCreateSDTO newPerson)
         {
+            return _PersonDataAccess.AddPerson(newPerson);
+        }
 
-            return _PersonDataAccess.Update(personID, personCreateDTO) !=-1;
+        public bool DeletePerson(int personID)
+        {
+            return _PersonDataAccess.DeletePerson(personID);
         }
 
     }

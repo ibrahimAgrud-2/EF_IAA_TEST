@@ -21,25 +21,62 @@ namespace EF_InternApplicationAutomator.API.Controllers
             _person = p;
         }
 
-        
+
+        [HttpGet("All")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<IEnumerable<PersonResponseSDTO>> GetAllPeople()
+        {
+
+            List<PersonResponseSDTO> StudentList = _person.GetAllPeople();
+            if (StudentList.Count == 0)
+            {
+                return NotFound("No Data Available in the Table");
+            }
+
+            return Ok(StudentList);
+        }
+
+
+        [HttpGet("{ID}", Name = "Find")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<PersonResponseSDTO> Find(int ID)
+        {
+            if (ID < 1)
+            {
+                return BadRequest($"Not Accepted ID {ID}");
+            }
+            PersonResponseSDTO p = _person.Find(ID);
+            if (p == null)
+            {
+                return NotFound($"No Person With ID {ID}");
+            }
+            return Ok(p);
+
+        }
+
 
         //here we use http put method for update
         [HttpPut("{id}", Name = "UpdatePerson")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<string> UpdateStudent(int id,PersonCreateSDTO personCreateDTO)
+        public ActionResult<PersonResponseSDTO> UpdatePerson(int id, PersonCreateSDTO updatedPerson)
         {
-
-
-
-            //TODO: Inset isPersonExist Function. If person does not exist return NotFound
-
-
-
-            if (_person.UpdatePerson(id, personCreateDTO))
+            if (id < 1 || updatedPerson == null)
             {
-                return Ok("ok");
+                return BadRequest("Invalid Person data.");
+            }
+
+
+            //TODO: check if exists
+
+
+            if (_person.UpdatePerson(id, updatedPerson)>0)
+            {
+                return Ok(updatedPerson);
             }
             else
             {
@@ -48,5 +85,52 @@ namespace EF_InternApplicationAutomator.API.Controllers
             }
 
         }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult<PersonResponseSDTO> AddNewPerson(PersonCreateSDTO newStudentDTO)
+        {
+            //we validate the data here
+            if (newStudentDTO == null)
+            {
+                return BadRequest("Invalid student data.");
+            }
+            int ID = _person.AddPerson(newStudentDTO);
+
+            if(ID<1)
+            {
+                //TODO: use proper status code instead of bad request
+                return BadRequest("Could no added");
+            }
+
+            return CreatedAtRoute("Find", new { id = ID }, newStudentDTO);
+
+        }
+
+        //here we use HttpDelete method
+        [HttpDelete("{id}", Name = "DeletePerson")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult DeleteStudent(int id)
+        {
+            if (id < 1)
+            {
+                return BadRequest($"Not accepted ID {id}");
+            }
+
+            // var student = StudentDataSimulation.StudentsList.FirstOrDefault(s => s.Id == id);
+            // StudentDataSimulation.StudentsList.Remove(student);
+
+            if (_person.DeletePerson(id))
+
+                return Ok($"Student with ID {id} has been deleted.");
+            else
+                return NotFound($"Student with ID {id} not found. no rows deleted!");
+        }
+
+
     }
 }
