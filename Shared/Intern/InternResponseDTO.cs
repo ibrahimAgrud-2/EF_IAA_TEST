@@ -10,9 +10,7 @@ namespace Shared.Intern
         [Required]
         public int PersonID { get; set; }
 
-        [Required]
-        [MaxLength(100)]
-        public string PasswordHash { get; set; }
+
 
         [Required]
         public DateTime StartDate { get; set; }
@@ -25,12 +23,11 @@ namespace Shared.Intern
         [Required]
         public byte Status { get; set; }
 
-        public InternResponseDTO(int internID, int personID, string passwordHash,
+        public InternResponseDTO(int internID, int personID,
             DateTime startDate, DateTime? endDate, DateTime createdDate, byte status)
         {
             InternID = internID;
             PersonID = personID;
-            PasswordHash = passwordHash;
             StartDate = startDate;
             EndDate = endDate;
             CreatedDate = createdDate;

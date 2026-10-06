@@ -1794,7 +1794,6 @@
         "required": [
           "createdDate",
           "internID",
-          "passwordHash",
           "personID",
           "startDate",
           "status"
@@ -1808,11 +1807,6 @@
           "personID": {
             "type": "integer",
             "format": "int32"
-          },
-          "passwordHash": {
-            "maxLength": 100,
-            "minLength": 1,
-            "type": "string"
           },
           "startDate": {
             "type": "string",
@@ -1981,7 +1975,6 @@
         "required": [
           "createdDate",
           "isActive",
-          "passwordHash",
           "permissionType",
           "personID",
           "userID",
@@ -2004,10 +1997,6 @@
           "permissionType": {
             "type": "integer",
             "format": "int32"
-          },
-          "passwordHash": {
-            "minLength": 1,
-            "type": "string"
           },
           "createdDate": {
             "type": "string",

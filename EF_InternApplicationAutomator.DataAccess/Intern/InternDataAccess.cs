@@ -22,7 +22,7 @@ namespace EF_InternApplicationAutomator.DataAccess.Intern
             foreach (var intern in internList)
             {
                 internDTOs.Add(new InternResponseDTO(intern.InternID, intern.PersonID,
-                    intern.PasswordHash, intern.StartDate, intern.EndDate,
+                    intern.StartDate, intern.EndDate,
                     intern.CreatedDate, intern.Status));
             }
 
@@ -38,7 +38,7 @@ namespace EF_InternApplicationAutomator.DataAccess.Intern
             }
 
             return new InternResponseDTO(intern.InternID, intern.PersonID,
-                intern.PasswordHash, intern.StartDate, intern.EndDate,
+                intern.StartDate, intern.EndDate,
                 intern.CreatedDate, intern.Status);
         }
 

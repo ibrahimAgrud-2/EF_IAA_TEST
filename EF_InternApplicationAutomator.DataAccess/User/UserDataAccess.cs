@@ -25,7 +25,7 @@ namespace EF_InternApplicationAutomator.DataAccess.User
             //mapping
             foreach (var user in userList)
             {
-                userDTOs.Add(new UserResponseDTO(user.UserID,user.PersonID,user.UserName,user.PasswordHash,user.PermissionType,user.CreatedDate,user.IsActive));
+                userDTOs.Add(new UserResponseDTO(user.UserID,user.PersonID,user.UserName,user.PermissionType,user.CreatedDate,user.IsActive));
             }
             return userDTOs;
         }
@@ -41,7 +41,7 @@ namespace EF_InternApplicationAutomator.DataAccess.User
             }
             else
             {
-                return new UserResponseDTO(user.UserID, user.PersonID, user.UserName, user.PasswordHash, user.PermissionType, user.CreatedDate, user.IsActive);
+                return new UserResponseDTO(user.UserID, user.PersonID, user.UserName, user.PermissionType, user.CreatedDate, user.IsActive);
             }
         }
 

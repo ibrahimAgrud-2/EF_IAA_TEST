@@ -21,8 +21,6 @@ namespace Shared.User
         [Required]
         public int PermissionType { get; set; }
 
-        [Required]
-        public string PasswordHash { get; set; }
 
         [Required]
         public DateTime CreatedDate { get; set; }
@@ -30,14 +28,14 @@ namespace Shared.User
         [Required]
         public bool IsActive { get; set; }
 
-        public UserResponseDTO(int userID, int personID, string userName, string passwordHash, int permissionType, DateTime createdDate, bool isActive)
+        public UserResponseDTO(int userID, int personID, string userName, int permissionType, DateTime createdDate, bool isActive)
         {
 
             PersonID = personID;
             PermissionType = permissionType;
             CreatedDate = createdDate;
             IsActive = isActive;
-            PasswordHash = passwordHash;
+           
             UserName = userName;
             this.UserID = userID;
         }
