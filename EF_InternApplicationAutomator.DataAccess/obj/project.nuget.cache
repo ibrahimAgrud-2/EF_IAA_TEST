@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5nAeiDM4TfQ=",
+  "dgSpecHash": "TyDtBRtXoTY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ibrah\\source\\repos\\EF_InternApplicationAutomator\\EF_InternApplicationAutomator.DataAccess\\EF_InternApplicationAutomator.DataAccess.csproj",
+  "projectFilePath": "C:\\Users\\ibrah\\Masaüstü\\Internship_Automator_API_EF\\EF_InternApplicationAutomator.DataAccess\\EF_InternApplicationAutomator.DataAccess.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ibrah\\.nuget\\packages\\azure.core\\1.41.0\\azure.core.1.41.0.nupkg.sha512",
     "C:\\Users\\ibrah\\.nuget\\packages\\azure.identity\\1.12.1\\azure.identity.1.12.1.nupkg.sha512",
