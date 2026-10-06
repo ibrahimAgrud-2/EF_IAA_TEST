@@ -38,7 +38,7 @@ namespace EF_InternApplicationAutomator.API.Controllers
         }
 
 
-        [HttpGet("{ID}", Name = "Find")]
+        [HttpGet("{ID}", Name = "FindPerson")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -95,7 +95,7 @@ namespace EF_InternApplicationAutomator.API.Controllers
             //we validate the data here
             if (newStudentDTO == null)
             {
-                return BadRequest("Invalid student data.");
+                return BadRequest("Invalid Person data.");
             }
             int ID = _person.AddPerson(newStudentDTO);
 
@@ -104,7 +104,7 @@ namespace EF_InternApplicationAutomator.API.Controllers
                 //TODO: use proper status code instead of bad request
                 return BadRequest("Could no added");
             }
-
+           
             return CreatedAtRoute("Find", new { id = ID }, newStudentDTO);
 
         }
@@ -114,21 +114,21 @@ namespace EF_InternApplicationAutomator.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult DeleteStudent(int id)
+        public ActionResult DeletePerson(int id)
         {
             if (id < 1)
             {
                 return BadRequest($"Not accepted ID {id}");
             }
 
-            // var student = StudentDataSimulation.StudentsList.FirstOrDefault(s => s.Id == id);
-            // StudentDataSimulation.StudentsList.Remove(student);
+            // var Person = StudentDataSimulation.StudentsList.FirstOrDefault(s => s.Id == id);
+            // StudentDataSimulation.StudentsList.Remove(Person);
 
             if (_person.DeletePerson(id))
 
-                return Ok($"Student with ID {id} has been deleted.");
+                return Ok($"Person with ID {id} has been deleted.");
             else
-                return NotFound($"Student with ID {id} not found. no rows deleted!");
+                return NotFound($"Person with ID {id} not found. no rows deleted!");
         }
 
 

@@ -17,7 +17,7 @@ namespace Shared.User
         public int PersonID { get; set; }
 
         [Required]
-        public string PermissionType { get; set; }
+        public int PermissionType { get; set; }
 
         [Required]
         public string PasswordHash { get; set; }
@@ -28,7 +28,7 @@ namespace Shared.User
         [Required]
         public bool IsActive { get; set; }
 
-        public UserCreateDTO(int UserID, int personID, string userName, string passwordHash, string permissionType, DateTime createdDate, bool isActive)
+        public UserCreateDTO( int personID, string userName, string passwordHash, int permissionType, DateTime createdDate, bool isActive)
         {
 
             PersonID = personID;

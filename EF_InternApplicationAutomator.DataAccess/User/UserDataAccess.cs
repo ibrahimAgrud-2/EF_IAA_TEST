@@ -1,10 +1,8 @@
-﻿using Shared;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Shared;
 using Shared.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace EF_InternApplicationAutomator.DataAccess.User
 {
@@ -21,10 +19,8 @@ namespace EF_InternApplicationAutomator.DataAccess.User
         public List<UserResponseDTO> GetAllUser()
         {
             List<UserEntity> userList = _Context.Users.ToList();
-
+   
             List<UserResponseDTO> userDTOs = new List<UserResponseDTO>();
-
-
 
             //mapping
             foreach (var user in userList)
@@ -34,5 +30,67 @@ namespace EF_InternApplicationAutomator.DataAccess.User
             return userDTOs;
         }
 
+
+        public UserResponseDTO Find(int userID)
+        {
+            UserEntity user = _Context.Users.Find(userID);
+            if (user == null)
+            {
+                //Log
+                return null;
+            }
+            else
+            {
+                return new UserResponseDTO(user.UserID, user.PersonID, user.UserName, user.PasswordHash, user.PermissionType, user.CreatedDate, user.IsActive);
+            }
+        }
+
+        public int UpdateUser(int userID, UserCreateDTO userDTO)
+        {
+            var user = _Context.Users.Find(userID);
+            if (user == null && userDTO == null)
+            {
+                return -1;
+            }
+
+            user.UserName = userDTO.UserName;
+            user.PersonID = userDTO.PersonID;
+            user.PasswordHash = userDTO.PasswordHash;
+            user.PermissionType = userDTO.PermissionType;
+            user.IsActive = userDTO.IsActive;
+            user.CreatedDate = userDTO.CreatedDate;
+
+
+            if (_Context.SaveChanges() > 0)
+            {
+                return userID;
+            }
+
+            return -1;
+        }
+        public int AddUser(UserCreateDTO user)
+        {
+            UserEntity userEntity = new UserEntity(0,user.PersonID,user.UserName,user.PasswordHash,user.PermissionType,user.CreatedDate,user.IsActive);
+            EntityEntry<UserEntity> pw = _Context.Users.Add(userEntity);
+
+            if (_Context.SaveChanges() > 0)
+            {
+                return userEntity.UserID;
+            }
+
+            return -1;
+        }
+        public bool DeleteUser(int userID)
+        {
+            return _Context.Users
+                    .Where(u => u.UserID == userID)
+                    .ExecuteDelete() > 0;
+        }
+
+        //any, objeyi yüklemez. Sadece var/yok kontrolü yapar
+        public bool IsUserExists(int userID)
+        {
+           return _Context.Users.Any(u => u.UserID == userID);
+        }
     }
 }
