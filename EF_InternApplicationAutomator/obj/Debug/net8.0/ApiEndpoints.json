@@ -408,5 +408,31 @@
         "StatusCode": 404
       }
     ]
+  },
+  {
+    "ContainingType": "EF_InternApplicationAutomator.API.Controllers.User.UserController",
+    "Method": "IsUserExists",
+    "RelativePath": "api/User/exists/{userID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]
