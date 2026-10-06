@@ -1,0 +1,95 @@
+using EF_InternApplicationAutomator.DataAccess.Intern;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Shared.Intern;
+
+namespace EF_InternApplicationAutomator.DataAccess.Intern
+{
+    public class InternDataAccess
+    {
+        private readonly IAADbContext _Context;
+
+        public InternDataAccess(IAADbContext context)
+        {
+            _Context = context;
+        }
+
+        public List<InternResponseDTO> GetAllIntern()
+        {
+            List<InternEntity> internList = _Context.Interns.ToList();
+            List<InternResponseDTO> internDTOs = new List<InternResponseDTO>();
+
+            foreach (var intern in internList)
+            {
+                internDTOs.Add(new InternResponseDTO(intern.InternID, intern.PersonID,
+                    intern.PasswordHash, intern.StartDate, intern.EndDate,
+                    intern.CreatedDate, intern.Status));
+            }
+
+            return internDTOs;
+        }
+
+        public InternResponseDTO Find(int internID)
+        {
+            InternEntity intern = _Context.Interns.Find(internID);
+            if (intern == null)
+            {
+                return null;
+            }
+
+            return new InternResponseDTO(intern.InternID, intern.PersonID,
+                intern.PasswordHash, intern.StartDate, intern.EndDate,
+                intern.CreatedDate, intern.Status);
+        }
+
+        public int AddIntern(InternCreateDTO intern)
+        {
+            InternEntity internEntity = new InternEntity(0, intern.PersonID,
+                intern.PasswordHash, intern.StartDate, intern.EndDate,
+                intern.CreatedDate, intern.Status);
+            EntityEntry<InternEntity> addedIntern = _Context.Interns.Add(internEntity);
+
+            if (_Context.SaveChanges() > 0)
+            {
+                return internEntity.InternID;
+            }
+
+            return -1;
+        }
+
+        public int UpdateIntern(int internID, InternCreateDTO internDTO)
+        {
+            var intern = _Context.Interns.Find(internID);
+            if (intern == null || internDTO == null)
+            {
+                return -1;
+            }
+
+            intern.PersonID = internDTO.PersonID;
+            intern.PasswordHash = internDTO.PasswordHash;
+            intern.StartDate = internDTO.StartDate;
+            intern.EndDate = internDTO.EndDate;
+            intern.CreatedDate = internDTO.CreatedDate;
+            intern.Status = internDTO.Status;
+
+            if (_Context.SaveChanges() > 0)
+            {
+                return internID;
+            }
+
+            return -1;
+        }
+
+        public bool DeleteIntern(int internID)
+        {
+            return _Context.Interns
+                .Where(intern => intern.InternID == internID)
+                .ExecuteDelete() > 0;
+        }
+
+        public bool IsInternExists(int internID)
+        {
+            return _Context.Interns.Any(intern => intern.InternID == internID);
+        }
+    }
+}
