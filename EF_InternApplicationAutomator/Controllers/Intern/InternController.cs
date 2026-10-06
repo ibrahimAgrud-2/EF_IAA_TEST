@@ -1,0 +1,131 @@
+using EF_InternApplicationAutomator.Business.Intern;
+using Microsoft.AspNetCore.Mvc;
+using Shared.Intern;
+
+namespace EF_InternApplicationAutomator.API.Controllers.Intern
+{
+    [Route("api/Intern")]
+    [ApiController]
+    public class InternController : ControllerBase
+    {
+        private readonly InternBL _Intern;
+
+        public InternController(InternBL intern)
+        {
+            _Intern = intern;
+        }
+
+        [HttpGet("All")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<IEnumerable<InternResponseDTO>> GetAllInterns()
+        {
+            List<InternResponseDTO> internList = _Intern.GetAllInterns();
+            if (internList.Count == 0)
+            {
+                return NotFound("No Data Available in the Table");
+            }
+
+            return Ok(internList);
+        }
+
+        [HttpGet("{ID}", Name = "FindIntern")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<InternResponseDTO> Find(int ID)
+        {
+            if (ID < 1)
+            {
+                return BadRequest($"Not Accepted ID {ID}");
+            }
+
+            InternResponseDTO intern = _Intern.Find(ID);
+            if (intern == null)
+            {
+                return NotFound($"No Intern With ID {ID}");
+            }
+
+            return Ok(intern);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult<InternResponseDTO> AddNewIntern(InternCreateDTO newIntern)
+        {
+            if (newIntern == null)
+            {
+                return BadRequest("Invalid Intern data.");
+            }
+
+            int ID = _Intern.AddIntern(newIntern);
+            if (ID < 1)
+            {
+                return BadRequest("Could Not Add Intern");
+            }
+
+            return CreatedAtRoute("FindIntern", new { id = ID }, newIntern);
+        }
+
+        [HttpPut("{id}", Name = "UpdateIntern")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<InternResponseDTO> UpdateIntern(int id, InternCreateDTO internDTO)
+        {
+            if (id < 1 || internDTO == null)
+            {
+                return BadRequest("Invalid Intern data.");
+            }
+
+            if (!_Intern.IsInternExists(id))
+            {
+                return NotFound($"No Intern With ID {id}");
+            }
+
+            if (_Intern.UpdateIntern(id, internDTO) > 0)
+            {
+                return Ok(internDTO);
+            }
+
+            return BadRequest("Could Not Update Intern");
+        }
+
+        [HttpDelete("{id}", Name = "DeleteIntern")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult DeleteIntern(int id)
+        {
+            if (id < 1)
+            {
+                return BadRequest($"Not Accepted ID {id}");
+            }
+
+            if (!_Intern.IsInternExists(id))
+            {
+                return NotFound($"No Intern With ID {id}");
+            }
+
+            if (_Intern.DeleteIntern(id))
+            {
+                return Ok($"Intern with ID {id} has been deleted.");
+            }
+
+            return NotFound("Delete Process terminated. No rows deleted!");
+        }
+
+        [HttpGet("exists/{internID}")]
+        public bool IsInternExists(int internID)
+        {
+            if (internID < 1)
+            {
+                return false;
+            }
+
+            return _Intern.IsInternExists(internID);
+        }
+    }
+}

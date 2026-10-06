@@ -29,6 +29,9 @@ builder.Services.AddScoped<EF_InternApplicationAutomator.Business.User.UserBL>()
 builder.Services.AddScoped<EF_InternApplicationAutomator.DataAccess.Application.ApplicationDataAccess>();
 builder.Services.AddScoped<EF_InternApplicationAutomator.Business.Application.ApplicationBL>();
 
+builder.Services.AddScoped<EF_InternApplicationAutomator.DataAccess.Intern.InternDataAccess>();
+builder.Services.AddScoped<EF_InternApplicationAutomator.Business.Intern.InternBL>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,0 +1,45 @@
+using EF_InternApplicationAutomator.DataAccess.Intern;
+using Shared.Intern;
+
+namespace EF_InternApplicationAutomator.Business.Intern
+{
+    public class InternBL
+    {
+        private readonly InternDataAccess _InternDataAccess;
+
+        public InternBL(InternDataAccess internDataAccess)
+        {
+            _InternDataAccess = internDataAccess;
+        }
+
+        public List<InternResponseDTO> GetAllInterns()
+        {
+            return _InternDataAccess.GetAllIntern();
+        }
+
+        public InternResponseDTO Find(int internID)
+        {
+            return _InternDataAccess.Find(internID);
+        }
+
+        public int UpdateIntern(int internID, InternCreateDTO internCreateDTO)
+        {
+            return _InternDataAccess.UpdateIntern(internID, internCreateDTO);
+        }
+
+        public int AddIntern(InternCreateDTO newIntern)
+        {
+            return _InternDataAccess.AddIntern(newIntern);
+        }
+
+        public bool DeleteIntern(int internID)
+        {
+            return _InternDataAccess.DeleteIntern(internID);
+        }
+
+        public bool IsInternExists(int internID)
+        {
+            return _InternDataAccess.IsInternExists(internID);
+        }
+    }
+}
