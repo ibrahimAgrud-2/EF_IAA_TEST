@@ -18,6 +18,7 @@ namespace EF_InternApplicationAutomator.DataAccess.User
         [MaxLength(20)]
         public string UserName { get; set; }
 
+      
         [Required]
         public int PersonID { get; set; }
 
