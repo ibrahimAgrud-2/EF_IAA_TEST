@@ -46,8 +46,6 @@ namespace Shared.Application
         [MaxLength(150)]
         public string Notes { get; set; } 
 
-        [MaxLength(150)]
-        public string CVPath { get; set; }
 
         [MaxLength(50)]
         public string LinkedinURL { get; set; }
@@ -57,7 +55,7 @@ namespace Shared.Application
 
         public ApplicationResponseDTO(int applicationID, int personID, int? reviewedByUserID,
             DateTime? reviewDate, DateTime applicationDate, string university, string department,
-            short classYear, byte status, string notes, string cvPath, string linkedinURL, string githubURL)
+            short classYear, byte status, string notes, string linkedinURL, string githubURL)
         {
             this.ApplicationID = applicationID;
             this.PersonID = personID;
@@ -69,7 +67,7 @@ namespace Shared.Application
             this.ClassYear = classYear;
             this.Status = status;
             this.Notes = notes;
-            this.CVPath = cvPath;
+           
             this.LinkedinURL = linkedinURL;
             this.GithubURL = githubURL;
         }

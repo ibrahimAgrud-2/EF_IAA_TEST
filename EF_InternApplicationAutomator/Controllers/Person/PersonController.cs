@@ -105,7 +105,7 @@ namespace EF_InternApplicationAutomator.API.Controllers
                 return BadRequest("Could no added");
             }
            
-            return CreatedAtRoute("Find", new { id = ID }, newStudentDTO);
+            return CreatedAtRoute("FindPerson", new { id = ID }, newStudentDTO);
 
         }
 

@@ -41,8 +41,7 @@ namespace EF_InternApplicationAutomator.DataAccess.Application
         [MaxLength(150)]
         public string Notes { get; set; }
 
-        [MaxLength(150)]
-        public string CVPath { get; set; }
+
 
         [MaxLength(50)]
         public string LinkedinURL { get; set; }
@@ -51,7 +50,7 @@ namespace EF_InternApplicationAutomator.DataAccess.Application
         public string GithubURL { get; set; }
 
       
-        public ApplicationEntity(int applicationID, int personID, int? reviewedByUserID, DateTime? reviewDate, DateTime applicationDate,string university, string department, short classYear, byte status, string notes,  string cvPath, string linkedinURL, string githubURL)
+        public ApplicationEntity(int applicationID, int personID, int? reviewedByUserID, DateTime? reviewDate, DateTime applicationDate,string university, string department, short classYear, byte status, string notes, string linkedinURL, string githubURL)
         {
             ApplicationID = applicationID;
             PersonID = personID;
@@ -63,7 +62,7 @@ namespace EF_InternApplicationAutomator.DataAccess.Application
             ClassYear = classYear;
             Status = status;
             Notes = notes;
-            CVPath = cvPath;
+          
             LinkedinURL = linkedinURL;
             GithubURL = githubURL;
         }

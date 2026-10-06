@@ -53,7 +53,7 @@ namespace EF_InternApplicationAutomator.DataAccess
         public int UpdatePerson(int personID, PersonCreateSDTO personCreateDTO)
         {
             var person = _Context.People.Find(personID);
-            if (person == null && personCreateDTO == null)
+            if (person == null || personCreateDTO == null)
             {
                 return -1;
             }

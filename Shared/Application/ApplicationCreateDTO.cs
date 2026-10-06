@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Shared.Application
 {
-    public class UserCreateDTO
+    public class ApplicationCreateDTO
     {
        
 
@@ -41,8 +41,7 @@ namespace Shared.Application
         [MaxLength(150)]
         public string Notes { get; set; }
 
-        [MaxLength(150)]
-        public string CVPath { get; set; }
+
 
         [MaxLength(50)]
         public string LinkedinURL { get; set; }
@@ -50,9 +49,9 @@ namespace Shared.Application
         [MaxLength(50)]
         public string GithubURL { get; set; }
 
-        public ApplicationResponseDTO( int personID, int? reviewedByUserID,
+        public ApplicationCreateDTO( int personID, int? reviewedByUserID,
             DateTime? reviewDate, DateTime applicationDate, string university, string department,
-            short classYear, byte status, string notes, string cvPath, string linkedinURL, string githubURL)
+            short classYear, byte status, string notes, string linkedinURL, string githubURL)
         {
             
             this.PersonID = personID;
@@ -64,7 +63,7 @@ namespace Shared.Application
             this.ClassYear = classYear;
             this.Status = status;
             this.Notes = notes;
-            this.CVPath = cvPath;
+        
             this.LinkedinURL = linkedinURL;
             this.GithubURL = githubURL;
         }
