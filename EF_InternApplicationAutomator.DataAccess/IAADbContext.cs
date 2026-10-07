@@ -1,5 +1,6 @@
 ﻿using EF_InternApplicationAutomator.DataAccess.Application;
 using EF_InternApplicationAutomator.DataAccess.Intern;
+using EF_InternApplicationAutomator.DataAccess.Project;
 using EF_InternApplicationAutomator.DataAccess.User;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,5 +20,6 @@ namespace EF_InternApplicationAutomator.DataAccess
         public DbSet<UserEntity> Users { set; get; }
         public DbSet<ApplicationEntity> Applications { set; get; }
         public DbSet<InternEntity> Interns { set; get; }
+        public DbSet<ProjectEntity> Projects { get; set; }
     }
 }
