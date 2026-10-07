@@ -73,14 +73,14 @@ namespace EF_InternApplicationAutomator.DataAccess.OngoingProjects
         public bool DeleteOngoingProject(int ongoingProjectID)
         {
             return _Context.OngoingProjects
-                .Where(ongoingProject => ongoingProject.OngoingProjectID == ongoingProjectID)
+                .Where(p => p.OngoingProjectID == ongoingProjectID)
                 .ExecuteDelete() > 0;
         }
 
         public bool IsOngoingProjectExists(int ongoingProjectID)
         {
             return _Context.OngoingProjects.Any(
-                ongoingProject => ongoingProject.OngoingProjectID == ongoingProjectID);
+                p => p.OngoingProjectID == ongoingProjectID);
         }
 
         private static OngoingProjectResponseDTO ToResponseDTO(OngoingProjectEntity ongoingProject)

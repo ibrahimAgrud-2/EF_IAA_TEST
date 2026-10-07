@@ -37,6 +37,7 @@ namespace EF_InternApplicationAutomator.DataAccess.Project
                 return null;
             }
 
+
             return new ProjectResponseDTO(
                 project.ProjectID,
                 project.CreatedByUserID,

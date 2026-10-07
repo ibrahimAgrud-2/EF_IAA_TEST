@@ -111,7 +111,7 @@ namespace EF_InternApplicationAutomator.API.Controllers.Intern
 
             if (_Intern.DeleteIntern(id))
             {
-                return Ok($"Intern with ID {id} has been deleted.");
+                return NoContent();
             }
 
             return NotFound("Delete Process terminated. No rows deleted!");

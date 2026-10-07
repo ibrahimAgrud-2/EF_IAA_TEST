@@ -127,7 +127,7 @@
 
             if (_User.DeleteUser(id))
 
-                return Ok($"User with ID {id} has been deleted.");
+                return NoContent();
             else
                 return NotFound($"Delete Process terminated. No rows deleted!");
         }

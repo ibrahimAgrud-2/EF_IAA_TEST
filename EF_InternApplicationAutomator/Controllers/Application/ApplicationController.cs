@@ -111,7 +111,7 @@ namespace EF_InternApplicationAutomator.API.Controllers.Application
 
             if (_application.DeleteApplication(id))
             {
-                return Ok($"Application with ID {id} has been deleted.");
+                return NoContent();
             }
             else
             {

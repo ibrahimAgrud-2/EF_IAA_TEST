@@ -126,7 +126,7 @@ namespace EF_InternApplicationAutomator.API.Controllers
 
             if (_person.DeletePerson(id))
 
-                return Ok($"Person with ID {id} has been deleted.");
+                return NoContent();
             else
                 return NotFound($"Person with ID {id} not found. no rows deleted!");
         }
