@@ -4,3 +4,79 @@ GET {{EF_InternApplicationAutomator_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+### Get all tasks
+GET {{EF_InternApplicationAutomator_HostAddress}}/api/Tasks/All
+Accept: application/json
+
+### Get a task by ID
+GET {{EF_InternApplicationAutomator_HostAddress}}/api/Tasks/1
+Accept: application/json
+
+### Create a task
+POST {{EF_InternApplicationAutomator_HostAddress}}/api/Tasks
+Content-Type: application/json
+
+{
+  "createdByUserID": 1,
+  "ongoingProjectID": 1,
+  "title": "Prepare project report",
+  "createdAt": "2026-10-07T09:00:00",
+  "dueDate": "2026-10-14T17:00:00"
+}
+
+### Update a task
+PUT {{EF_InternApplicationAutomator_HostAddress}}/api/Tasks/1
+Content-Type: application/json
+
+{
+  "createdByUserID": 1,
+  "ongoingProjectID": 1,
+  "title": "Finalize project report",
+  "createdAt": "2026-10-07T09:00:00",
+  "dueDate": "2026-10-16T17:00:00"
+}
+
+### Check if a task exists
+GET {{EF_InternApplicationAutomator_HostAddress}}/api/Tasks/exists/1
+Accept: application/json
+
+### Delete a task
+DELETE {{EF_InternApplicationAutomator_HostAddress}}/api/Tasks/1
+
+### Get all ongoing projects
+GET {{EF_InternApplicationAutomator_HostAddress}}/api/OngoingProjects/All
+Accept: application/json
+
+### Get an ongoing project by ID
+GET {{EF_InternApplicationAutomator_HostAddress}}/api/OngoingProjects/1
+Accept: application/json
+
+### Create an ongoing project
+POST {{EF_InternApplicationAutomator_HostAddress}}/api/OngoingProjects
+Content-Type: application/json
+
+{
+  "internID": 1,
+  "projectID": 1,
+  "startDate": "2026-10-07T09:00:00",
+  "dueDate": "2026-12-07T17:00:00"
+}
+
+### Update an ongoing project
+PUT {{EF_InternApplicationAutomator_HostAddress}}/api/OngoingProjects/1
+Content-Type: application/json
+
+{
+  "internID": 1,
+  "projectID": 1,
+  "startDate": "2026-10-08T09:00:00",
+  "dueDate": "2026-12-08T17:00:00"
+}
+
+### Check if an ongoing project exists
+GET {{EF_InternApplicationAutomator_HostAddress}}/api/OngoingProjects/exists/1
+Accept: application/json
+
+### Delete an ongoing project
+DELETE {{EF_InternApplicationAutomator_HostAddress}}/api/OngoingProjects/1

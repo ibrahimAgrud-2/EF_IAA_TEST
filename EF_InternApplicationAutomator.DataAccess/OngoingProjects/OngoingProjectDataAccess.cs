@@ -1,0 +1,96 @@
+using Microsoft.EntityFrameworkCore;
+using Shared.OngoingProjects;
+
+namespace EF_InternApplicationAutomator.DataAccess.OngoingProjects
+{
+    public class OngoingProjectDataAccess
+    {
+        private readonly IAADbContext _Context;
+
+        public OngoingProjectDataAccess(IAADbContext context)
+        {
+            _Context = context;
+        }
+
+        public List<OngoingProjectResponseDTO> GetAllOngoingProjects()
+        {
+            List<OngoingProjectEntity> ongoingProjects = _Context.OngoingProjects.ToList();
+            List<OngoingProjectResponseDTO> responseDTOs = new List<OngoingProjectResponseDTO>();
+
+            foreach (var ongoingProject in ongoingProjects)
+            {
+                responseDTOs.Add(ToResponseDTO(ongoingProject));
+            }
+
+            return responseDTOs;
+        }
+
+        public OngoingProjectResponseDTO? Find(int ongoingProjectID)
+        {
+            OngoingProjectEntity? ongoingProject = _Context.OngoingProjects.Find(ongoingProjectID);
+            return ongoingProject == null ? null : ToResponseDTO(ongoingProject);
+        }
+
+        public int AddOngoingProject(OngoingProjectCreateDTO ongoingProject)
+        {
+            OngoingProjectEntity entity = new OngoingProjectEntity(
+                0,
+                ongoingProject.InternID,
+                ongoingProject.ProjectID,
+                ongoingProject.StartDate,
+                ongoingProject.DueDate);
+            _Context.OngoingProjects.Add(entity);
+
+            if (_Context.SaveChanges() > 0)
+            {
+                return entity.OngoingProjectID;
+            }
+
+            return -1;
+        }
+
+        public int UpdateOngoingProject(int ongoingProjectID, OngoingProjectCreateDTO ongoingProjectDTO)
+        {
+            OngoingProjectEntity? ongoingProject = _Context.OngoingProjects.Find(ongoingProjectID);
+            if (ongoingProject == null || ongoingProjectDTO == null)
+            {
+                return -1;
+            }
+
+            ongoingProject.InternID = ongoingProjectDTO.InternID;
+            ongoingProject.ProjectID = ongoingProjectDTO.ProjectID;
+            ongoingProject.StartDate = ongoingProjectDTO.StartDate;
+            ongoingProject.DueDate = ongoingProjectDTO.DueDate;
+
+            if (_Context.SaveChanges() > 0)
+            {
+                return ongoingProjectID;
+            }
+
+            return -1;
+        }
+
+        public bool DeleteOngoingProject(int ongoingProjectID)
+        {
+            return _Context.OngoingProjects
+                .Where(ongoingProject => ongoingProject.OngoingProjectID == ongoingProjectID)
+                .ExecuteDelete() > 0;
+        }
+
+        public bool IsOngoingProjectExists(int ongoingProjectID)
+        {
+            return _Context.OngoingProjects.Any(
+                ongoingProject => ongoingProject.OngoingProjectID == ongoingProjectID);
+        }
+
+        private static OngoingProjectResponseDTO ToResponseDTO(OngoingProjectEntity ongoingProject)
+        {
+            return new OngoingProjectResponseDTO(
+                ongoingProject.OngoingProjectID,
+                ongoingProject.InternID,
+                ongoingProject.ProjectID,
+                ongoingProject.StartDate,
+                ongoingProject.DueDate);
+        }
+    }
+}

@@ -1,0 +1,143 @@
+using EF_InternApplicationAutomator.Business.OngoingProjects;
+using Microsoft.AspNetCore.Mvc;
+using Shared.OngoingProjects;
+
+namespace EF_InternApplicationAutomator.API.Controllers.OngoingProjects
+{
+    [Route("api/OngoingProjects")]
+    [ApiController]
+    public class OngoingProjectsController : ControllerBase
+    {
+        private readonly OngoingProjectsBL _OngoingProjects;
+
+        public OngoingProjectsController(OngoingProjectsBL ongoingProjects)
+        {
+            _OngoingProjects = ongoingProjects;
+        }
+
+        [HttpGet("All")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<IEnumerable<OngoingProjectResponseDTO>> GetAllOngoingProjects()
+        {
+            List<OngoingProjectResponseDTO> projects = _OngoingProjects.GetAllOngoingProjects();
+            if (projects.Count == 0)
+            {
+                return NotFound("No Data Available in the Table");
+            }
+
+            return Ok(projects);
+        }
+
+        [HttpGet("{id}", Name = "FindOngoingProject")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<OngoingProjectResponseDTO> Find(int id)
+        {
+            if (id < 1)
+            {
+                return BadRequest($"Not Accepted ID {id}");
+            }
+
+            OngoingProjectResponseDTO? ongoingProject = _OngoingProjects.Find(id);
+            if (ongoingProject == null)
+            {
+                return NotFound($"No Ongoing Project With ID {id}");
+            }
+
+            return Ok(ongoingProject);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<OngoingProjectResponseDTO> AddNewOngoingProject(
+            OngoingProjectCreateDTO newOngoingProject)
+        {
+            if (newOngoingProject == null)
+            {
+                return BadRequest("Invalid Ongoing Project data.");
+            }
+
+            int ongoingProjectID = _OngoingProjects.AddOngoingProject(newOngoingProject);
+            if (ongoingProjectID < 1)
+            {
+                return BadRequest("Could Not Add Ongoing Project");
+            }
+
+            var createdOngoingProject = new OngoingProjectResponseDTO(
+                ongoingProjectID,
+                newOngoingProject.InternID,
+                newOngoingProject.ProjectID,
+                newOngoingProject.StartDate,
+                newOngoingProject.DueDate);
+
+            return CreatedAtRoute(
+                "FindOngoingProject",
+                new { id = ongoingProjectID },
+                createdOngoingProject);
+        }
+
+        [HttpPut("{id}", Name = "UpdateOngoingProject")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<OngoingProjectResponseDTO> UpdateOngoingProject(
+            int id,
+            OngoingProjectCreateDTO ongoingProjectDTO)
+        {
+            if (id < 1 || ongoingProjectDTO == null)
+            {
+                return BadRequest("Invalid Ongoing Project data.");
+            }
+
+            if (!_OngoingProjects.IsOngoingProjectExists(id))
+            {
+                return NotFound($"No Ongoing Project With ID {id}");
+            }
+
+            if (_OngoingProjects.UpdateOngoingProject(id, ongoingProjectDTO) > 0)
+            {
+                return Ok(new OngoingProjectResponseDTO(
+                    id,
+                    ongoingProjectDTO.InternID,
+                    ongoingProjectDTO.ProjectID,
+                    ongoingProjectDTO.StartDate,
+                    ongoingProjectDTO.DueDate));
+            }
+
+            return BadRequest("Could Not Update Ongoing Project");
+        }
+
+        [HttpDelete("{id}", Name = "DeleteOngoingProject")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult DeleteOngoingProject(int id)
+        {
+            if (id < 1)
+            {
+                return BadRequest($"Not Accepted ID {id}");
+            }
+
+            if (!_OngoingProjects.IsOngoingProjectExists(id))
+            {
+                return NotFound($"No Ongoing Project With ID {id}");
+            }
+
+            if (_OngoingProjects.DeleteOngoingProject(id))
+            {
+                return NoContent();
+            }
+
+            return NotFound("Delete Process terminated. No rows deleted!");
+        }
+
+        [HttpGet("exists/{ongoingProjectID}")]
+        public bool IsOngoingProjectExists(int ongoingProjectID)
+        {
+            return ongoingProjectID > 0 && _OngoingProjects.IsOngoingProjectExists(ongoingProjectID);
+        }
+    }
+}

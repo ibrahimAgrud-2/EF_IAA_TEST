@@ -31,6 +31,15 @@ builder.Services.AddScoped<EF_InternApplicationAutomator.Business.Application.Ap
 builder.Services.AddScoped<EF_InternApplicationAutomator.DataAccess.Intern.InternDataAccess>();
 builder.Services.AddScoped<EF_InternApplicationAutomator.Business.Intern.InternBL>();
 
+builder.Services.AddScoped<EF_InternApplicationAutomator.DataAccess.Project.ProjectDataAccess>();
+builder.Services.AddScoped<EF_InternApplicationAutomator.Business.Project.ProjectsBL>();
+
+builder.Services.AddScoped<EF_InternApplicationAutomator.DataAccess.Tasks.TaskDataAccess>();
+builder.Services.AddScoped<EF_InternApplicationAutomator.Business.Tasks.TasksBL>();
+
+builder.Services.AddScoped<EF_InternApplicationAutomator.DataAccess.OngoingProjects.OngoingProjectDataAccess>();
+builder.Services.AddScoped<EF_InternApplicationAutomator.Business.OngoingProjects.OngoingProjectsBL>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
