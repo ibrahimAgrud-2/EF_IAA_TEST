@@ -11,7 +11,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("WebClient", policy =>
+        policy.WithOrigins("https://localhost:7156")
+              .AllowAnyHeader()
+              .AllowAnyMethod());
+});
 
 //Connection String
 builder.Services.AddDbContext<IAADbContext>(options =>
@@ -50,7 +56,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors("WebClient");
 app.UseAuthorization();
 
 app.MapControllers();

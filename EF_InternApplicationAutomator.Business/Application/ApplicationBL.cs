@@ -12,10 +12,12 @@ namespace EF_InternApplicationAutomator.Business.Application
     public class ApplicationBL
     {
         ApplicationDataAccess _ApplicationDataAccess;
+        PersonBL _person;
 
-        public ApplicationBL(ApplicationDataAccess applicationDataAccess)
+        public ApplicationBL(ApplicationDataAccess applicationDataAccess,PersonBL person)
         {
             _ApplicationDataAccess = applicationDataAccess;
+            _person = person;
         }
 
         public List<ApplicationResponseDTO> GetAllApplications()
@@ -35,6 +37,12 @@ namespace EF_InternApplicationAutomator.Business.Application
 
         public int AddApplication(ApplicationCreateDTO newApplication)
         {
+           
+            if (_person.IsPersonExistByEmail(newApplication.GithubURL))
+            {
+               
+            }
+
             return _ApplicationDataAccess.AddApplication(newApplication);
         }
 

@@ -35,9 +35,9 @@ namespace EF_InternApplicationAutomator.DataAccess
         }
 
 
-        public PersonResponseSDTO Find(int personID)
+        public PersonResponseSDTO? Find(int personID)
         {
-            PersonEntity Person = _Context.People.Find(personID);
+            PersonEntity? Person = _Context.People.Find(personID);
             if (Person == null)
             {
                 //Log
@@ -49,7 +49,19 @@ namespace EF_InternApplicationAutomator.DataAccess
             }
         }
 
-
+        public PersonResponseSDTO? FindByEmail(string email)
+        {
+            PersonEntity? Person = _Context.People.FirstOrDefault(p=>p.Email==email);
+            if (Person == null)
+            {
+                //Log
+                return null;
+            }
+            else
+            {
+                return new PersonResponseSDTO(Person.PersonID, Person.FirstName, Person.LastName, Person.Email, Person.Phone, Person.Address, Person.ImagePath);
+            }
+        }
         public int UpdatePerson(int personID, PersonCreateSDTO personCreateDTO)
         {
             var person = _Context.People.Find(personID);
@@ -97,5 +109,12 @@ namespace EF_InternApplicationAutomator.DataAccess
                     .ExecuteDelete() > 0;
         }
 
+
+
+        //------------------------------ CRUD DONE --------------------
+        public bool IsPersonExistByEmail(string email)
+        {
+            return _Context.People.Any(p => p.Email == email);
+        }
     }
 }

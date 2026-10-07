@@ -22,11 +22,15 @@ namespace EF_InternApplicationAutomator.Business
             return _PersonDataAccess.GetAllPeople();
         }
 
-        public PersonResponseSDTO Find(int personID)
+        public PersonResponseSDTO? Find(int personID)
         {
             return _PersonDataAccess.Find(personID);
         }
 
+        public PersonResponseSDTO? FindByEmail(string email)
+        {
+            return _PersonDataAccess.FindByEmail(email);
+        }
         public int UpdatePerson(int personID,PersonCreateSDTO personCreateSDTO)
         {
             return _PersonDataAccess.UpdatePerson(personID,personCreateSDTO);
@@ -40,6 +44,13 @@ namespace EF_InternApplicationAutomator.Business
         public bool DeletePerson(int personID)
         {
             return _PersonDataAccess.DeletePerson(personID);
+        }
+
+
+
+        public  bool IsPersonExistByEmail(string email)
+        {
+            return _PersonDataAccess.IsPersonExistByEmail(email);
         }
 
     }
