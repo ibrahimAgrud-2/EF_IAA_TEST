@@ -58,12 +58,14 @@ namespace EF_InternApplicationAutomator.API.Controllers.Application
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<ApplicationResponseDTO> AddNewApplication(ApplicationCreateDTO newApplicationDTO)
+        public ActionResult<ApplicationResponseDTO> AddNewApplication(ApplicationCreateSecure newApplicationDTO)
         {
-            if (newApplicationDTO == null)
+            if (newApplicationDTO == null||newApplicationDTO.PersonInfo==null)
             {
                 return BadRequest("Invalid Application data.");
             }
+
+  
 
             int ID = _application.AddApplication(newApplicationDTO);
 
@@ -80,7 +82,7 @@ namespace EF_InternApplicationAutomator.API.Controllers.Application
         //[ProducesResponseType(StatusCodes.Status200OK)]
         //[ProducesResponseType(StatusCodes.Status400BadRequest)]
         //[ProducesResponseType(StatusCodes.Status404NotFound)]
-        //public ActionResult<ApplicationResponseDTO> UpdateApplication(int id, ApplicationCreateDTO updatedApplication)
+        //public ActionResult<ApplicationResponseDTO> UpdateApplication(int id, ApplicationUpdateDTO updatedApplication)
         //{
         //    if (id < 1 || updatedApplication == null)
         //    {

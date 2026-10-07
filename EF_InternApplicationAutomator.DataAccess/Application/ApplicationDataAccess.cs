@@ -64,7 +64,7 @@ namespace EF_InternApplicationAutomator.DataAccess.Application
             return -1;
         }
 
-        public int UpdateApplication(int appID, ApplicationCreateDTO appResponseDTO)
+        public int UpdateApplication(int appID, ApplicationUpdateDTO appResponseDTO)
         {
             var app = _Context.Applications.Find(appID);
 

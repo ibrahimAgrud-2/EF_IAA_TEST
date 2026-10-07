@@ -9,7 +9,7 @@
     "Parameters": [
       {
         "Name": "newApplicationDTO",
-        "Type": "Shared.Application.ApplicationCreateDTO",
+        "Type": "Shared.Application.ApplicationCreateSecure",
         "IsRequired": true
       }
     ],
@@ -38,56 +38,6 @@
         "StatusCode": 500
       }
     ]
-  },
-  {
-    "ContainingType": "EF_InternApplicationAutomator.API.Controllers.Application.ApplicationController",
-    "Method": "UpdateApplication",
-    "RelativePath": "api/Application/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "updatedApplication",
-        "Type": "Shared.Application.ApplicationCreateDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Shared.Application.ApplicationResponseDTO",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
-      }
-    ],
-    "EndpointName": "UpdateApplication"
   },
   {
     "ContainingType": "EF_InternApplicationAutomator.API.Controllers.Application.ApplicationController",

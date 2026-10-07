@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InternAutomator.WebClient")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ef2ebc77ff7926d240869bc6a396050ae6be0c81")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+085e2ba93111354dd23410f10787f4e796503fcb")]
 [assembly: System.Reflection.AssemblyProductAttribute("InternAutomator.WebClient")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InternAutomator.WebClient")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
