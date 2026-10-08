@@ -34,9 +34,11 @@ namespace EF_InternApplicationAutomator.Business.Application
             return _ApplicationDataAccess.Find(appID);
         }
 
-        public int UpdateApplication(int appID, ApplicationUpdateDTO appResponseDTO)
+        public int UpdateStatus(ApplicationStatusUpdateDTO applicationStatus)
         {
-            return _ApplicationDataAccess.UpdateApplication(appID, appResponseDTO);
+
+
+            return _ApplicationDataAccess.UpdateStatus(applicationStatus.ApplicationID, applicationStatus);
         }
 
         public int AddApplication(ApplicationCreateSecure newApplicationDTO)

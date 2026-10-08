@@ -55,7 +55,7 @@ namespace EF_InternApplicationAutomator.DataAccess.Application
             return -1;
         }
 
-        public int UpdateApplication(int appID, ApplicationUpdateDTO appResponseDTO)
+        public int UpdateStatus(int appID, ApplicationStatusUpdateDTO appResponseDTO)
         {
             var app = _Context.Applications.Find(appID);
 
@@ -64,17 +64,12 @@ namespace EF_InternApplicationAutomator.DataAccess.Application
                 return -1;
             }
 
-            app.PersonID = appResponseDTO.PersonID;
-            app.ReviewedByUserID = appResponseDTO.ReviewedByUserID;
-            app.ReviewDate = appResponseDTO.ReviewDate;
-            app.ApplicationDate = appResponseDTO.ApplicationDate;
-            app.University = appResponseDTO.University;
-            app.Department = appResponseDTO.Department;
-            app.ClassYear = appResponseDTO.ClassYear;
-            app.Status = appResponseDTO.Status;
+            //TODO: 2 yerine LOGİN yapmış use'ın ID'sini ver
+            app.ReviewedByUserID = 2;
+            app.ReviewDate = DateTime.Now.Date;
+            app.Status = appResponseDTO.status;
             app.Notes = appResponseDTO.Notes;
-            app.LinkedinURL = appResponseDTO.LinkedinURL;
-            app.GithubURL = appResponseDTO.GithubURL;
+
 
             if (_Context.SaveChanges() > 0)
             {

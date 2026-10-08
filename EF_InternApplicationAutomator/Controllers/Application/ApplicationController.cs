@@ -78,26 +78,26 @@ namespace EF_InternApplicationAutomator.API.Controllers.Application
         }
 
 
-        //[HttpPut("{id}", Name = "UpdateApplication")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[ProducesResponseType(StatusCodes.Status404NotFound)]
-        //public ActionResult<ApplicationResponseDTO> UpdateApplication(int id, ApplicationUpdateDTO updatedApplication)
-        //{
-        //    if (id < 1 || updatedApplication == null)
-        //    {
-        //        return BadRequest("Invalid Application data.");
-        //    }
+        [HttpPut( Name = "UpdateStatus")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<ApplicationStatusUpdateDTO> UpdateStatus(ApplicationStatusUpdateDTO updatedApplication)
+        {
+            if (updatedApplication.ApplicationID < 1 || updatedApplication == null)
+            {
+                return BadRequest("Invalid Application data.");
+            }
 
-        //    if (_application.UpdateApplication(id, updatedApplication) > 0)
-        //    {
-        //        return Ok(updatedApplication);
-        //    }
-        //    else
-        //    {
-        //        return NotFound("Could Not Update Application");
-        //    }
-        //}
+            if (_application.UpdateStatus(updatedApplication) > 0)
+            {
+                return Ok(updatedApplication);
+            }
+            else
+            {
+                return NotFound("Could Not Update Application");
+            }
+        }
 
 
         [HttpDelete("{id}", Name = "DeleteApplication")]
