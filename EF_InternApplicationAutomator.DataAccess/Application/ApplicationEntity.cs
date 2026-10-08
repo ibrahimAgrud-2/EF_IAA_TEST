@@ -17,6 +17,9 @@ namespace EF_InternApplicationAutomator.DataAccess.Application
         [Required]
         public int PersonID { get; set; }
 
+        [ForeignKey(nameof(PersonID))]
+        public PersonEntity Person { get; set; }
+
         public int? ReviewedByUserID { get; set; }
 
         public DateTime? ReviewDate { get; set; }
@@ -62,7 +65,6 @@ namespace EF_InternApplicationAutomator.DataAccess.Application
             ClassYear = classYear;
             Status = status;
             Notes = notes;
-          
             LinkedinURL = linkedinURL;
             GithubURL = githubURL;
         }

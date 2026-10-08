@@ -1,3 +1,4 @@
+wwwroot\Apply\apply.html
 wwwroot\bootstrap\css\bootstrap-grid.css
 wwwroot\bootstrap\css\bootstrap-grid.css.map
 wwwroot\bootstrap\css\bootstrap-grid.min.css
@@ -135,6 +136,7 @@ wwwroot\bootstrap\scss\_utilities.scss
 wwwroot\bootstrap\scss\_variables-dark.scss
 wwwroot\bootstrap\scss\_variables.scss
 wwwroot\index.html
-wwwroot\js\api.js
-wwwroot\Apply\apply.html
+wwwroot\js\applications.js
 wwwroot\js\apply.js
+wwwroot\Staff\applications.html
+wwwroot\js\api.js

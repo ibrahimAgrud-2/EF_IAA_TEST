@@ -24,7 +24,7 @@ namespace EF_InternApplicationAutomator.Business.Application
             _person = person;
         }
 
-        public List<ApplicationResponseDTO> GetAllApplications()
+        public List<ApplicationListDTO> GetAllApplications()
         {
             return _ApplicationDataAccess.GetAllApplication();
         }

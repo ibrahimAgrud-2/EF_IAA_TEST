@@ -51,4 +51,35 @@ async function apiPost(path, body) {
 // ---- Başvuru işlemleri ----
 function submitApplication(application) {
     return apiPost("Application", application);
+
+
+}
+
+
+async function apiGet(path) {
+    let response;
+
+    try {
+        response = await fetch(`${API_BASE}/${path}`);
+    } catch {
+        throw new ApiError(0, ["Sunucuya ulaşılamadı. Lütfen tekrar deneyin."]);
+    }
+
+    if (!response.ok) {
+        throw new ApiError(response.status, await readErrorMessages(response));
+    }
+
+    return await response.json();
+}
+
+// Endpoint tablo boşken 404 döndüğü için burada "boş liste" olarak ele alınıyor
+async function getAllApplications() {
+    try {
+        return await apiGet("Application/All");
+    } catch (error) {
+        if (error instanceof ApiError && error.status === 404) {
+            return [];
+        }
+        throw error;
+    }
 }

@@ -16,22 +16,18 @@ namespace EF_InternApplicationAutomator.DataAccess.Application
         }
 
 
-        public List<ApplicationCreateSecure> GetAllApplication()
+        public List<ApplicationListDTO> GetAllApplication()
         {
-            List<ApplicationEntity> applications = _Context.Applications.ToList();
 
-            List<ApplicationCreateSecure> applicationResponseDTOs = new List<ApplicationCreateSecure>();
-
-            //mapping
-            foreach (var app in applications)
-            {
-                applicationResponseDTOs.Add(new ApplicationResponseDTO(app.ApplicationID,app.PersonID,app.ReviewedByUserID,app.ReviewDate,app.ApplicationDate,app.University,app.Department,app.ClassYear,app.Status,app.Notes,app.LinkedinURL,app.GithubURL));
-            }
-            return applicationResponseDTOs;
+            return _Context.Applications
+                .AsNoTracking()
+                .Select(a => new ApplicationListDTO(new Shared.PersonCreateSDTO(a.Person.FirstName,a.Person.LastName,a.Person.Email,a.Person.Phone,a.Person.Address,a.Person.ImagePath),a.ApplicationID, a.Status,a.ApplicationDate, a.University,a.Department,a.ClassYear,a.Notes,a.LinkedinURL,a.GithubURL
+                ))
+                .ToList();
         }
-        public ApplicationResponseDTO Find(int appID)
+        public ApplicationResponseDTO? Find(int appID)
         {
-            ApplicationEntity app = _Context.Applications.Find(appID);
+            ApplicationEntity? app = _Context.Applications.Find(appID);
             if (app == null)
             {
                 //Log

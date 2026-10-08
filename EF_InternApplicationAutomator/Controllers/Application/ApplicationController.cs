@@ -20,9 +20,9 @@ namespace EF_InternApplicationAutomator.API.Controllers.Application
         [HttpGet("All")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<IEnumerable<ApplicationResponseDTO>> GetAllApplications()
+        public ActionResult<IEnumerable<ApplicationListDTO>> GetAllApplications()
         {
-            List<ApplicationResponseDTO> applicationList = _application.GetAllApplications();
+            List<ApplicationListDTO> applicationList = _application.GetAllApplications();
 
             if (applicationList.Count == 0)
             {

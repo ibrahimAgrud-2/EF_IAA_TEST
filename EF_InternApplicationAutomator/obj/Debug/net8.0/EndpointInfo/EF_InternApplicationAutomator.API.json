@@ -18,7 +18,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ApplicationResponseDTO"
+                    "$ref": "#/components/schemas/ApplicationListDTO"
                   }
                 }
               },
@@ -26,7 +26,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ApplicationResponseDTO"
+                    "$ref": "#/components/schemas/ApplicationListDTO"
                   }
                 }
               },
@@ -34,7 +34,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ApplicationResponseDTO"
+                    "$ref": "#/components/schemas/ApplicationListDTO"
                   }
                 }
               }
@@ -2749,6 +2749,64 @@
         ],
         "type": "object",
         "properties": {
+          "personInfo": {
+            "$ref": "#/components/schemas/PersonCreateSDTO"
+          },
+          "university": {
+            "maxLength": 30,
+            "minLength": 1,
+            "type": "string"
+          },
+          "department": {
+            "maxLength": 30,
+            "minLength": 1,
+            "type": "string"
+          },
+          "classYear": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "notes": {
+            "maxLength": 150,
+            "type": "string",
+            "nullable": true
+          },
+          "linkedinURL": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "githubURL": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApplicationListDTO": {
+        "required": [
+          "applicationDate",
+          "applicationID",
+          "classYear",
+          "department",
+          "status",
+          "university"
+        ],
+        "type": "object",
+        "properties": {
+          "applicationID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "applicationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
           "personInfo": {
             "$ref": "#/components/schemas/PersonCreateSDTO"
           },
