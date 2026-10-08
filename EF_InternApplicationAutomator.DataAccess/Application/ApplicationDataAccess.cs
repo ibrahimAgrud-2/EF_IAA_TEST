@@ -1,12 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Shared;
 using Shared.Application;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace EF_InternApplicationAutomator.DataAccess.Application
 {
@@ -21,11 +16,11 @@ namespace EF_InternApplicationAutomator.DataAccess.Application
         }
 
 
-        public List<ApplicationResponseDTO> GetAllApplication()
+        public List<ApplicationCreateSecure> GetAllApplication()
         {
             List<ApplicationEntity> applications = _Context.Applications.ToList();
 
-            List<ApplicationResponseDTO> applicationResponseDTOs = new List<ApplicationResponseDTO>();
+            List<ApplicationCreateSecure> applicationResponseDTOs = new List<ApplicationCreateSecure>();
 
             //mapping
             foreach (var app in applications)
