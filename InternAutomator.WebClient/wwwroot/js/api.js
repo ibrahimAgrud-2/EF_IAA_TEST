@@ -83,3 +83,34 @@ async function getAllApplications() {
         throw error;
     }
 }
+
+
+// Update status
+async function sendJson(method, path, body) {
+    let response;
+
+    try {
+        response = await fetch(`${API_BASE}/${path}`, {
+            method: method,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        });
+    } catch {
+        throw new ApiError(0, ["Sunucuya ulaşılamadı. Lütfen tekrar deneyin."]);
+    }
+
+    if (!response.ok) {
+        throw new ApiError(response.status, await readErrorMessages(response));
+    }
+
+    return response.status === 204 ? null : await response.json();
+}
+
+function apiPut(path, body) {
+    return sendJson("PUT", path, body);
+}
+
+// Başvurunun durumunu (onay/ret) ve değerlendirme notunu günceller
+function updateApplicationStatus(applicationID, status, notes) {
+    return apiPut("Application/update/status", { applicationID, status, notes });
+}

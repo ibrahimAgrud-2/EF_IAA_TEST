@@ -1,4 +1,5 @@
-﻿// Durum numarası -> ekranda gösterilecek metin ve rozet rengi (tek yerde tutulur)
+﻿// ---------- Sabitler ----------
+// Durum numarası -> ekranda gösterilecek metin ve rozet rengi
 const STATUS = {
     0: { text: "Yeni", badge: "bg-primary" },
     1: { text: "İptal", badge: "bg-secondary" },
@@ -6,23 +7,68 @@ const STATUS = {
     3: { text: "Onaylandı", badge: "bg-success" }
 };
 const STATUS_NEW = 0;
+const STATUS_REJECTED = 2;
+const STATUS_APPROVED = 3;
 
+// Buton eylemi -> API'ya gönderilecek durum ve modal metinleri (tek yerde)
+const ACTIONS = {
+    approve: {
+        status: STATUS_APPROVED,
+        title: "Başvuruyu onayla",
+        result: "onaylanacak",
+        buttonText: "Onayla",
+        buttonClass: "btn-success"
+    },
+    reject: {
+        status: STATUS_REJECTED,
+        title: "Başvuruyu reddet",
+        result: "reddedilecek",
+        buttonText: "Reddet",
+        buttonClass: "btn-danger"
+    }
+};
+
+// ---------- Sayfa elemanları ----------
 const statusBox = document.getElementById("statusBox");
 const tableWrapper = document.getElementById("tableWrapper");
 const tableBody = document.getElementById("applicationsBody");
 
-// ---------- Mesaj kutusu ----------
-function showStatus(type, messages) {
-    statusBox.replaceChildren();
-    statusBox.className = `alert alert-${type}`;
+const decisionModal = new bootstrap.Modal(document.getElementById("decisionModal"));
+const decisionModalElement = document.getElementById("decisionModal");
+const decisionForm = document.getElementById("decisionForm");
+const decisionTitle = document.getElementById("decisionTitle");
+const decisionSummary = document.getElementById("decisionSummary");
+const decisionNotes = document.getElementById("decisionNotes");
+const decisionError = document.getElementById("decisionError");
+const decisionSubmit = document.getElementById("decisionSubmit");
+
+// ---------- Durum ----------
+let applicationsById = new Map();   // listedeki başvurular (id -> başvuru)
+let pendingDecision = null;         // modalda açık olan karar: { action, applicationID }
+
+// ---------- Ortak yardımcılar ----------
+function getErrorMessages(error) {
+    return error instanceof ApiError
+        ? error.messages
+        : ["Beklenmeyen bir hata oluştu."];
+}
+
+function fillMessageBox(box, messages) {
+    box.replaceChildren();
 
     messages.forEach(text => {
         const line = document.createElement("div");
         line.textContent = text;
-        statusBox.appendChild(line);
+        box.appendChild(line);
     });
 
-    statusBox.hidden = false;
+    box.hidden = false;
+}
+
+// ---------- Liste üstündeki mesaj kutusu ----------
+function showStatus(type, messages) {
+    statusBox.className = `alert alert-${type}`;
+    fillMessageBox(statusBox, messages);
 }
 
 function hideStatus() {
@@ -39,6 +85,11 @@ function createCell(text) {
 function formatDate(isoDate) {
     if (!isoDate) return "";
     return new Date(isoDate).toLocaleDateString("tr-TR");
+}
+
+function getFullName(application) {
+    const person = application.personInfo ?? {};
+    return `${person.firstName ?? ""} ${person.lastName ?? ""}`.trim();
 }
 
 function createLinkItem(label, url) {
@@ -88,13 +139,14 @@ function createStatusCell(status) {
     return td;
 }
 
-function createActionButton(text, cssClass, action, applicationId) {
+function createActionButton(actionKey, applicationId) {
+    const action = ACTIONS[actionKey];
+
     const button = document.createElement("button");
     button.type = "button";
-    button.className = `btn btn-sm ${cssClass} me-1`;
-    button.textContent = text;
-    // Butonları bağlayacağımız adımda bu iki bilgi işimizi görecek
-    button.dataset.action = action;
+    button.className = `btn btn-sm ${action.buttonClass} me-1`;
+    button.textContent = action.buttonText;
+    button.dataset.action = actionKey;
     button.dataset.applicationId = applicationId;
     return button;
 }
@@ -104,8 +156,8 @@ function createActionsCell(application) {
 
     // Onay/ret butonları sadece "Yeni" başvurularda görünür
     if (application.status === STATUS_NEW) {
-        td.appendChild(createActionButton("Onayla", "btn-success", "approve", application.applicationID));
-        td.appendChild(createActionButton("Reddet", "btn-danger", "reject", application.applicationID));
+        td.appendChild(createActionButton("approve", application.applicationID));
+        td.appendChild(createActionButton("reject", application.applicationID));
     }
 
     return td;
@@ -116,7 +168,7 @@ function createRow(application) {
     const person = application.personInfo ?? {};
     const tr = document.createElement("tr");
 
-    tr.appendChild(createCell(`${person.firstName ?? ""} ${person.lastName ?? ""}`.trim()));
+    tr.appendChild(createCell(getFullName(application)));
     tr.appendChild(createCell(person.email));
     tr.appendChild(createCell(application.university));
     tr.appendChild(createCell(application.department));
@@ -134,13 +186,15 @@ function renderApplications(applications) {
     applications.forEach(application => tableBody.appendChild(createRow(application)));
 }
 
-// ---------- Sayfa akışı ----------
+// ---------- Listeyi yükleme ----------
 async function loadApplications() {
     tableWrapper.hidden = true;
     showStatus("info", ["Başvurular yükleniyor..."]);
 
     try {
         const applications = await getAllApplications();
+
+        applicationsById = new Map(applications.map(a => [a.applicationID, a]));
 
         if (applications.length === 0) {
             showStatus("secondary", ["Henüz başvuru yok."]);
@@ -156,11 +210,91 @@ async function loadApplications() {
         hideStatus();
         tableWrapper.hidden = false;
     } catch (error) {
-        const messages = error instanceof ApiError
-            ? error.messages
-            : ["Beklenmeyen bir hata oluştu."];
-        showStatus("danger", messages);
+        showStatus("danger", getErrorMessages(error));
     }
 }
+
+// ---------- Karar penceresi (modal) ----------
+function showDecisionError(messages) {
+    fillMessageBox(decisionError, messages);
+}
+
+function hideDecisionError() {
+    decisionError.hidden = true;
+}
+
+function setDecisionBusy(isBusy) {
+    decisionSubmit.disabled = isBusy;
+    decisionNotes.disabled = isBusy;
+}
+
+function openDecisionModal(actionKey, applicationID) {
+    const action = ACTIONS[actionKey];
+    const application = applicationsById.get(applicationID);
+    if (!action || !application) return;
+
+    pendingDecision = { action, applicationID };
+
+    decisionTitle.textContent = action.title;
+    decisionSummary.textContent =
+        `${getFullName(application)} adlı adayın başvurusu ${action.result}. Lütfen bir not girin.`;
+    decisionNotes.value = "";
+    hideDecisionError();
+    setDecisionBusy(false);
+
+    decisionSubmit.className = `btn ${action.buttonClass}`;
+    decisionSubmit.textContent = action.buttonText;
+
+    decisionModal.show();
+}
+
+async function submitDecision(event) {
+    event.preventDefault();
+    if (!pendingDecision) return;
+
+    const notes = decisionNotes.value.trim();
+    if (!notes) {
+        showDecisionError(["Not alanı zorunludur."]);
+        return;
+    }
+
+    hideDecisionError();
+    setDecisionBusy(true);
+
+    try {
+        await updateApplicationStatus(
+            pendingDecision.applicationID,
+            pendingDecision.action.status,
+            notes
+        );
+
+        decisionModal.hide();
+        await loadApplications();   // ekranda her zaman sunucudaki gerçek hal görünsün
+    } catch (error) {
+        showDecisionError(getErrorMessages(error));
+
+        // API isteği reddettiyse (örn. zaten karara bağlanmış) liste de eskimiş olabilir
+        if (error instanceof ApiError && error.status >= 400 && error.status < 500) {
+            loadApplications();
+        }
+    } finally {
+        setDecisionBusy(false);
+    }
+}
+
+// ---------- Olay dinleyicileri ----------
+// Satırlar her yüklemede yeniden çizildiği için tek bir dinleyici tablo gövdesinde durur
+tableBody.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-action]");
+    if (!button) return;
+
+    openDecisionModal(button.dataset.action, Number(button.dataset.applicationId));
+});
+
+decisionForm.addEventListener("submit", submitDecision);
+
+decisionModalElement.addEventListener("hidden.bs.modal", () => {
+    pendingDecision = null;
+});
 
 loadApplications();

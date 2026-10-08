@@ -32,6 +32,32 @@
         </table>
     </div>
 
+    <!-- Karar penceresi -->
+    <div class="modal fade" id="decisionModal" tabindex="-1" aria-labelledby="decisionTitle" aria-hidden="true">
+        <div class="modal-dialog">
+            <form class="modal-content" id="decisionForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="decisionTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="decisionSummary"></p>
+
+                    <label for="decisionNotes" class="form-label">Not</label>
+                    <textarea id="decisionNotes" class="form-control" rows="3" maxlength="150" required></textarea>
+                    <div class="form-text">Zorunlu, en fazla 150 karakter.</div>
+
+                    <div id="decisionError" class="alert alert-danger mt-3" hidden></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                    <button type="submit" id="decisionSubmit" class="btn btn-primary">Onayla</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/api.js"></script>
     <script src="/js/applications.js"></script>
 </body>

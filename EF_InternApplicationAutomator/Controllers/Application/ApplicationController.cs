@@ -78,13 +78,13 @@ namespace EF_InternApplicationAutomator.API.Controllers.Application
         }
 
 
-        [HttpPut( Name = "UpdateStatus")]
+        [HttpPut("Update/Status")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<ApplicationStatusUpdateDTO> UpdateStatus(ApplicationStatusUpdateDTO updatedApplication)
         {
-            if (updatedApplication.ApplicationID < 1 || updatedApplication == null)
+            if (updatedApplication == null||updatedApplication.ApplicationID < 1)
             {
                 return BadRequest("Invalid Application data.");
             }

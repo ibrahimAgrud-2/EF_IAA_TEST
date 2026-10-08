@@ -213,12 +213,13 @@
             "description": "Internal Server Error"
           }
         }
-      },
+      }
+    },
+    "/api/Application/Update/Status": {
       "put": {
         "tags": [
           "Application"
         ],
-        "operationId": "UpdateStatus",
         "requestBody": {
           "content": {
             "application/json": {
